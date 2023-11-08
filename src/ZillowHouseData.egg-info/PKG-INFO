@@ -1,3 +1,11 @@
+Metadata-Version: 2.1
+Name: ZillowHouseData
+Version: 0.0.0
+Summary: A small python package for house price prediction
+Home-page: https://github.com/MurariHarish/Zillow-data-ML-project
+Author: MurariHarish
+Project-URL: Bug Tracker, https://github.com/MurariHarish/Zillow-data-ML-project/issues
+
 # zillowmlproject
 
 # How to run?
