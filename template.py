@@ -10,6 +10,8 @@ project_name = 'ZillowHouseData'
 list_of_files = [
     ".github/workflows/.gitkeep",
     f"src/{project_name}/__init__.py",
+    f"src/{project_name}/logger.py",
+    f"src/{project_name}/exception.py",
     f"src/{project_name}/components/__init__.py",
     f"src/{project_name}/utils/__init__.py",
     f"src/{project_name}/config/configuratoin.py",
