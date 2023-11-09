@@ -1,0 +1,19 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/ZillowHouseData/pipeline/stage_01_data_ingestion.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: fe2dd5133a4c0016bde0047182a77f8a
+      size: 276
+    - path: src/ZillowHouseData/pipeline/stage_01_data_ingestion.py
+      hash: md5
+      md5: fd477cc70a37f4146faba8e902eb9ac3
+      size: 979
+    outs:
+    - path: artifacts/data_ingestion
+      hash: md5
+      md5: c39bd4788589d99bc1d3afd07335624b.dir
+      size: 5301498074
+      nfiles: 6

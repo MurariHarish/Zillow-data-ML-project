@@ -1,7 +1,7 @@
 import os
 from box.exceptions import BoxValueError
 import yaml
-from src.ZillowHouseData.logger import logger
+from ZillowHouseData.logger import logger
 import json
 import joblib
 from ensure import ensure_annotations
