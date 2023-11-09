@@ -5,5 +5,7 @@ logs/
 # Except the .gitignore file
 !logs/.gitignore
 
-
 artifacts/*
+
+# Ignore dvc.lock file
+dvc.lock
