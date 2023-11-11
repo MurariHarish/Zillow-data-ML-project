@@ -7,5 +7,9 @@ logs/
 
 artifacts/*
 
-# Ignore dvc.lock file
-dvc.lock
+mlops_zillow/*
+
+#Ignore dvc.lock file
+#dvc.lock
+final.csv
+

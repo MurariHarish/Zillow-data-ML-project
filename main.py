@@ -24,3 +24,4 @@ try:
 except Exception as e:
     logger.exception(e)
     raise CustomException(e,sys)
+
