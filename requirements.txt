@@ -15,6 +15,6 @@ types-PyYAML
 scipy
 Flask
 Flask-Cors
-dvc
 gdown
+apache-airflow
 -e .
