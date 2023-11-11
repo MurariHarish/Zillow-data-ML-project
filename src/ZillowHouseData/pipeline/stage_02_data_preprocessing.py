@@ -25,21 +25,19 @@ class DataPreprocessingTrainingPipeline:
             # Stage 3: Get Stats
             logger.info(f">>>>>> get stats <<<<<<\n\nx==========x")
             processed_data = data_preprocessor.get_stats(processed_data)
-            
             # Stage 4: Merge Data
             logger.info(f">>>>>> merging data <<<<<<\n\nx==========x")
             final_data = data_preprocessor.get_merge(processed_data)
             print(final_data.head())
+            logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 
 
 
 if __name__ == '__main__':
     #ingestion_stage()
     try:
-        logger.info(f">>>>>> stage {STAGE_NAME} initated <<<<<<\n\nx==========x")
         obj1 = DataPreprocessingTrainingPipeline()
         obj1.main()
-        logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
     except Exception as e:
         logger.exception(e)
         raise CustomException(e,sys)

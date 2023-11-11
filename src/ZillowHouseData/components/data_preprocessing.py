@@ -57,7 +57,7 @@ class DataPreprocessing:
 
     def get_merge(self, data):
         trimmed_df = pickle.loads(data)
-        df = pd.read_csv('stat.csv')
+        df = pd.read_csv('./artifacts/data_ingestion/stat.csv')
         intersted_indicators_ZHVI = ['ZATT', 'ZSFH', 'ZALL', 'ZCON', 'ZABT', 'Z2BR', 'Z5BR', 'Z3BR', 'Z1BR', 'Z4BR']
         ZHVI_df = trimmed_df[trimmed_df['indicator_id'].isin(intersted_indicators_ZHVI)]
         del trimmed_df
