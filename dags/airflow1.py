@@ -162,9 +162,25 @@ get_merge_task = PythonOperator(
     dag=dag,
 )
 
-# Set task dependencies
-download_data_task >> load_data_task >> data_preprocessing_task >> get_year_month_task >> get_stats_task >> get_merge_task
+# Task to perform the 'train_model_task' function, depends on 'get_stats_task'
+train_model_task = PythonOperator(
+    task_id='train_model_task',
+    python_callable=call_function,
+    op_args=['../mlflow/mlflow1', 'get_merge'],
+    dag=dag,
+)
 
+# Task to perform the 'register_model_task' function, depends on 'get_stats_task'
+register_model_task = PythonOperator(
+    task_id='register_model_task',
+    python_callable=call_function,
+    op_args=['../mlflow/mlflow1', 'get_merge'],
+    dag=dag,
+)
+
+# Set task dependencies
+# download_data_task >> load_data_task >> data_preprocessing_task >> get_year_month_task >> get_stats_task >> get_merge_task >> train_model_task >> register_model_task
+train_model_task >> register_model_task
 # If this script is run directly, allow command-line interaction with the DAG
 if __name__ == "__main__":
     dag.cli()

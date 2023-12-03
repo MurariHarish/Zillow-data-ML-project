@@ -13,3 +13,5 @@ mlops_zillow/*
 #dvc.lock
 final.csv
 
+/mlflow/mlruns/
+dags/src/__pycache__/mlflow.cpython-310.pyc
