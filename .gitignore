@@ -29,3 +29,5 @@ __pycache__/
 ./src/ZillowHouseData/pipeline/__pycache__/stage_01_data_ingestion.cpython-310.pyc
 ./src/ZillowHouseData/pipeline/__pycache__/stage_02_data_preprocessing.cpython-310.pyc
 ./src/ZillowHouseData/pipeline/__pycache__/stage_03_modelling.cpython-310.pyc
+/dags/data/
+*.DS_Store
