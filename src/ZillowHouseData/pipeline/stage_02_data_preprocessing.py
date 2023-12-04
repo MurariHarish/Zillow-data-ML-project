@@ -28,7 +28,7 @@ class DataPreprocessingTrainingPipeline:
             # Stage 4: Merge Data
             logger.info(f">>>>>> merging data <<<<<<\n\nx==========x")
             final_data = data_preprocessor.get_merge(processed_data)
-            print(final_data.head())
+            #print(final_data.head())
             logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 
 
