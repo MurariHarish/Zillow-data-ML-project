@@ -17,7 +17,7 @@ from ZillowHouseData.pipeline.stage_03_modelling import DataModellingPipeline
 #     raise CustomException(e,sys)
 
 STAGE_NAME = "Data Ingestion stage"
-'''
+
 try:
     logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
     obj = DataIngestionTrainingPipeline()
@@ -35,7 +35,7 @@ try:
     logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 except Exception as e:
     logger.exception(e)
-    raise CustomException(e,sys)'''
+    raise CustomException(e,sys)
 
 STAGE_NAME = "Data Modelling Stage"
 try:
