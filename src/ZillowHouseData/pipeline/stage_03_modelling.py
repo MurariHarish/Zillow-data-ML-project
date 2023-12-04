@@ -1,7 +1,7 @@
-from ZillowHouseData.components.data_model import DataModeling
-from ZillowHouseData.logger import logger
-from ZillowHouseData.exception import CustomException
-from ZillowHouseData.config.configuration import ConfigurationManager
+from src.ZillowHouseData.components.data_model import DataModeling
+from src.ZillowHouseData.logger import logger
+from src.ZillowHouseData.exception import CustomException
+from src.ZillowHouseData.config.configuration import ConfigurationManager
 import sys
 import os  # Don't forget to import 'os'
 

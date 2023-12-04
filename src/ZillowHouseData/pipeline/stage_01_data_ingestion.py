@@ -1,7 +1,7 @@
-from ZillowHouseData.config.configuration import ConfigurationManager
-from ZillowHouseData.components.data_ingestion import DataIngestion
-from ZillowHouseData.logger import logger
-from ZillowHouseData.exception import CustomException
+from src.ZillowHouseData.config.configuration import ConfigurationManager
+from src.ZillowHouseData.components.data_ingestion import DataIngestion
+from src.ZillowHouseData.logger import logger
+from src.ZillowHouseData.exception import CustomException
 import sys
 
 STAGE_NAME = "Data Ingestion stage"
@@ -20,10 +20,11 @@ class DataIngestionTrainingPipeline:
         logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 
 
-    def ingestion_stage(self):
-        try:
-            obj = DataIngestionTrainingPipeline()
-            obj.data_ingestion()
-        except Exception as e:
-            logger.exception(e)
-            raise CustomException(e,sys)
+def ingestion_stage():
+    try:
+        obj = DataIngestionTrainingPipeline()
+        obj.data_ingestion()
+    except Exception as e:
+        logger.exception(e)
+        raise CustomException(e,sys)
+
