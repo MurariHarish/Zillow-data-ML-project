@@ -2,7 +2,7 @@ from ZillowHouseData.components.data_preprocessing import DataPreprocessing
 from ZillowHouseData.logger import logger
 from ZillowHouseData.exception import CustomException
 from ZillowHouseData.config.configuration import ConfigurationManager
-from ZillowHouseData.pipeline.stage_01_data_ingestion import ingestion_stage
+from ZillowHouseData.pipeline.stage_01_data_ingestion import DataIngestionTrainingPipeline
 import sys
 
 STAGE_NAME = "Data Preprocessing stage"
@@ -11,7 +11,7 @@ class DataPreprocessingTrainingPipeline:
     def __init__(self):
         pass
 
-    def main(self):
+    def data_preprocess(self):
             # Create an instance of the DataPreprocessing class
             logger.info(f">>>>>> stage {STAGE_NAME} initated <<<<<<\n\nx==========x")
             data_preprocessor = DataPreprocessing()
@@ -33,12 +33,11 @@ class DataPreprocessingTrainingPipeline:
 
 
 
-if __name__ == '__main__':
-    #ingestion_stage()
-    try:
-        obj1 = DataPreprocessingTrainingPipeline()
-        obj1.main()
-    except Exception as e:
-        logger.exception(e)
-        raise CustomException(e,sys)
+    def preprocessing_stage(self):
+        try:
+            obj1 = DataPreprocessingTrainingPipeline()
+            obj1.data_preprocess()
+        except Exception as e:
+            logger.exception(e)
+            raise CustomException(e,sys)
     

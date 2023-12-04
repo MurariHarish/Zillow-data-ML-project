@@ -11,7 +11,7 @@ class DataModellingPipeline:
     def __init__(self):
         pass
 
-    def main(self):
+    def data_model(self):
         # Create an instance of the Modelling class   
         logger.info(f">>>>>> stage {STAGE_NAME} initiated <<<<<<\n\nx==========x")
         file_path = os.path.join('artifacts', 'data_ingestion', 'final.csv')
@@ -46,16 +46,16 @@ class DataModellingPipeline:
         # Predict using user input
         data_modeling.predict_user_input(model, scaler)
 
-    def processing_stage(self):  # Include 'self' as the first parameter
+    def modelling_stage(self):
         try:
             obj2 = DataModellingPipeline()
-            obj2.main()
+            obj2.data_model()
         except Exception as e:
             logger.exception(e)
             raise CustomException(e, sys)
 
 # Create an instance of DataModellingPipeline
-obj = DataModellingPipeline()
+#obj = DataModellingPipeline()
 
 # Call the method processing_stage
-obj.processing_stage()
+#obj.processing_stage()

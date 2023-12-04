@@ -2,8 +2,8 @@ import sys
 from ZillowHouseData.logger import logger
 from ZillowHouseData.exception import CustomException
 from ZillowHouseData.pipeline.stage_01_data_ingestion import DataIngestionTrainingPipeline
-from ZillowHouseData.pipeline.stage_02_data_preprocessing import DataPreprocessingTrainingPipeline
 from ZillowHouseData.pipeline.stage_03_modelling import DataModellingPipeline
+from ZillowHouseData.pipeline.stage_02_data_preprocessing import DataPreprocessingTrainingPipeline
 
 # # Checking logger and Exception
 # # logging
@@ -21,17 +21,18 @@ STAGE_NAME = "Data Ingestion stage"
 try:
     logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
     obj = DataIngestionTrainingPipeline()
-    obj.main()
+    obj.data_ingestion()
     logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 except Exception as e:
     logger.exception(e)
     raise CustomException(e,sys) 
 
 STAGE_NAME = "Data Preprocessing Stage"
+
 try:
     logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
     obj = DataPreprocessingTrainingPipeline()
-    obj.main()
+    obj.preprocessing_stage()
     logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 except Exception as e:
     logger.exception(e)
@@ -41,9 +42,8 @@ STAGE_NAME = "Data Modelling Stage"
 try:
     logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
     obj2 = DataModellingPipeline()
-    obj2.processing_stage()
+    obj2.modelling_stage()
     logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 except Exception as e:
     logger.exception(e)
     raise CustomException(e,sys)
-

@@ -1,6 +1,6 @@
 gdown
 ensure
-tensorflow>=2.0.0, <3.0.0
+tensorflow
 dvc
 python-box==6.0.2
 mlflow
