@@ -15,3 +15,13 @@ final.csv
 
 /mlflow/mlruns/
 dags/src/__pycache__/mlflow.cpython-310.pyc
+
+
+__pycache__/
+./src/ZillowHouseData/pipeline/__pycache__ 
+./src/ZillowHouseData/config/__pycache__ 
+./src/ZillowHouseData/entity/__pycache__ 
+./src/ZillowHouseData/constants/__pycache__ 
+./src/ZillowHouseData/utils/__pycache__ 
+./src/ZillowHouseData/__pycache__ 
+./src/ZillowHouseData/components/__pycache__

@@ -27,4 +27,3 @@ def ingestion_stage():
     except Exception as e:
         logger.exception(e)
         raise CustomException(e,sys)
-
