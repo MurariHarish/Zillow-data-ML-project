@@ -1,5 +1,5 @@
 import sys
-from ZillowHouseData.logger import logger
+from src.ZillowHouseData.logger import logger
 
 def error_message_detail(error,error_detail:sys):
     _,_,exc_tb = error_detail.exc_info()

@@ -1,6 +1,6 @@
-from ZillowHouseData.constants import *
-from ZillowHouseData.utils.common import create_directories, read_yaml
-from ZillowHouseData.entity.config_entity import DataIngestionConfig
+from src.ZillowHouseData.constants import *
+from src.ZillowHouseData.utils.common import create_directories, read_yaml
+from src.ZillowHouseData.entity.config_entity import DataIngestionConfig
 
 class ConfigurationManager:
     def __init__(

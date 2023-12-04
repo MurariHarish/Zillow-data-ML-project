@@ -1,8 +1,8 @@
-from ZillowHouseData.components.data_preprocessing import DataPreprocessing
-from ZillowHouseData.logger import logger
-from ZillowHouseData.exception import CustomException
-from ZillowHouseData.config.configuration import ConfigurationManager
-from ZillowHouseData.pipeline.stage_01_data_ingestion import DataIngestionTrainingPipeline
+from src.ZillowHouseData.components.data_preprocessing import DataPreprocessing
+from src.ZillowHouseData.logger import logger
+from src.ZillowHouseData.exception import CustomException
+from src.ZillowHouseData.config.configuration import ConfigurationManager
+from src.ZillowHouseData.pipeline.stage_01_data_ingestion import ingestion_stage
 import sys
 
 STAGE_NAME = "Data Preprocessing stage"
@@ -28,12 +28,13 @@ class DataPreprocessingTrainingPipeline:
             # Stage 4: Merge Data
             logger.info(f">>>>>> merging data <<<<<<\n\nx==========x")
             final_data = data_preprocessor.get_merge(processed_data)
-            #print(final_data.head())
+            # print(final_data.head())
             logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 
 
 
     def preprocessing_stage(self):
+    #ingestion_stage()
         try:
             obj1 = DataPreprocessingTrainingPipeline()
             obj1.data_preprocess()
