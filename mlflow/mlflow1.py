@@ -11,6 +11,9 @@ import xgboost as xgb
 from pyspark import SparkContext, SparkConf
 from mlflow.tracking import MlflowClient
 import time
+from sklearn.metrics import mean_squared_error
+import pandas as pd
+import os
 
 search_space = {
     'max_depth' : scope.int(hp.quniform('max_depth', 4, 100, 1)),
@@ -18,15 +21,26 @@ search_space = {
     'reg_alpha' : hp.loguniform('reg_alpha', -5, -1),
     'reg_lambda' : hp.loguniform('reg_lambda', -6, -1),
     'min_child_length' : hp.loguniform('min_chilg_length', -1, 3),
-    'objective' : 'binary:logistic',
+    'objective': 'reg:squarederror',
+    'eval_metric': 'rmse',
     'seed' : 123,
 }
 
 def model_training(params):
     mlflow.xgboost.autolog()
     # Load the diabetes dataset.
-    db = load_breast_cancer()
-    X_train, X_val, y_train, y_val = train_test_split(db.data, db.target)
+    # db = load_breast_cancer()
+    # X_train, X_val, y_train, y_val = train_test_split(db.data, db.target)
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), '../dags/data/final.csv'))
+    # Select relevant columns
+    columns_to_use = ['indicator_id', 'region_id', 'year', 'month', 'CRAM', 'IRAM', 'LRAM', 'MRAM', 'NRAM', 'SRAM']
+
+    # Define features and target variable
+    X = df[columns_to_use]
+    y = df['value']
+
+    # Split the data into training and testing sets
+    X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
 
     with mlflow.start_run(nested=True):
         train = xgb.DMatrix(data= X_train, label = y_train)
@@ -36,13 +50,15 @@ def model_training(params):
                             evals = [(validation, 'validation')], early_stopping_rounds = 50)
 
         validation_predictions = booster.predict(validation)
-        auc_score = roc_auc_score(y_val, validation_predictions)
-        mlflow.log_metric('auc', auc_score)
+        # auc_score = roc_auc_score(y_val, validation_predictions)
+        # mlflow.log_metric('auc', auc_score)
+        mse = mean_squared_error(y_val, validation_predictions)
+        mlflow.log_metric('mse', mse)
 
         signature = infer_signature(X_train, booster.predict(train))
         mlflow.xgboost.log_model(booster, 'model', signature = signature)
 
-        return {'status' : STATUS_OK, 'loss' : -1 * auc_score, 'booster' : booster.attributes()}
+        return {'status' : STATUS_OK, 'loss': mse, 'booster' : booster.attributes()}
 
 def train_model(**kwargs):
 
@@ -66,14 +82,14 @@ def register_model(**kwargs):
 
     model_name = 'test_model'
     #new run
-    new_best_run = mlflow.search_runs(order_by=['metrics.auc DESC']).iloc[0]
-    new_best_run_auc = new_best_run["metrics.auc"]
+    new_best_run = mlflow.search_runs(order_by=['metrics.mse DESC']).iloc[0]
+    new_best_run_mse = new_best_run["metrics.mse"]
     new_best_run_id = new_best_run.run_id
 
     new_model_version = mlflow.register_model(f"runs:/{new_best_run_id}/model", model_name)
     time.sleep(15)
 
-    print(f'AUC of Best Run: {new_best_run["metrics.auc"]}')
+    print(f'MSE of Best Run: {new_best_run["metrics.mse"]}')
     print(new_best_run_id)
 
     # old run

@@ -194,7 +194,7 @@ def get_stats(**kwargs):
 
     del stat_df
     del trimmed_df
-    stat_pivot_df.to_csv(os.path.join(os.path.dirname(__file__), '../data/stat.csv'))
+    stat_pivot_df.to_csv(os.path.join(os.path.dirname(__file__), '../data/stat.csv'), indelx =False)
     logger.info("File Saving done")
     # trimmed_data = pickle.dumps(trimmed_df)
     # return trimmed_data
@@ -221,8 +221,37 @@ def get_merge(**kwargs):
     logger.info("Final df done")
 
     # final_data = pickle.dumps(final_df)
-    final_df.to_csv(os.path.join(os.path.dirname(__file__), '../data/final.csv'))
+    final_df.to_csv(os.path.join(os.path.dirname(__file__), '../data/final.csv'),index = False)
     logger.info("File Saving done")
+    # return final_data
+
+def get_data_to_model(**kwargs):
+    # trimmed_df = pickle.loads(data)
+    logger = logging.getLogger("airflow.task")
+    logger.info("Starting get data to model task")
+
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), '../data/final.csv'))
+
+    # Drop unnecessary columns
+    columns_to_remove = ['date']
+    df = df.drop(columns=columns_to_remove)
+
+    logger.info("Datasets reading done")
+
+    # Encoding indicator_id
+    indicator_encoding = {'Z1BR': 0, 'Z2BR': 1, 'Z3BR': 2, 'Z4BR': 3, 'Z5BR': 4, 'ZABT': 5, 'ZALL': 6, 'ZATT': 7,
+                          'ZCON': 8, 'ZSFH': 9}
+    df['indicator_id'] = df['indicator_id'].map(indicator_encoding)
+    df['indicator_id'] = df['indicator_id'].astype(int)
+
+    logger.info("indicator encoding done")
+
+    # final_data = pickle.dumps(final_df)ß
+    df.to_csv(os.path.join(os.path.dirname(__file__), '../data/final.csv'), index= False)
+    logger.info("File Saving done")
+
+    del df
+
     # return final_data
 
 # logger = logging.getLogger("mylogger")
@@ -232,3 +261,4 @@ def get_merge(**kwargs):
 # get_year_month()
 # get_stats()
 # get_merge()
+# get_data_to_model()

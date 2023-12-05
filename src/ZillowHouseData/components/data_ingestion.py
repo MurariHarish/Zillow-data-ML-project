@@ -1,29 +1,36 @@
 import os, sys
 import zipfile
 import gdown
-from ZillowHouseData.logger import logger
-from ZillowHouseData.exception import CustomException
-from ZillowHouseData.entity.config_entity import DataIngestionConfig
+from src.ZillowHouseData.logger import logger
+from src.ZillowHouseData.exception import CustomException
+from src.ZillowHouseData.entity.config_entity import DataIngestionConfig
 
 class DataIngestion:
     def __init__(self, config: DataIngestionConfig):
         self.config = config
- 
+
     
     def download_file(self)-> str:
-                
+        '''
+        Fetch data from the url
+        '''
+
+        try: 
             dataset_url = self.config.source_URL
             zip_download_dir = self.config.local_data_file
             os.makedirs("artifacts/data_ingestion", exist_ok=True)
             logger.info(f"Downloading data from {dataset_url} into file {zip_download_dir}")
- 
+
             file_id = dataset_url.split("/")[-2]
             prefix = 'https://drive.google.com/uc?/export=download&id='
             gdown.download(prefix+file_id,zip_download_dir)
- 
+
             logger.info(f"Downloaded data from {dataset_url} into file {zip_download_dir}")
- 
- 
+
+        except Exception as e:
+            raise CustomException(e,sys)
+        
+
     def extract_zip_file(self):
         """
         zip_file_path: str
@@ -39,7 +46,7 @@ class DataIngestion:
         # Get the path to the current working directory
         os.chdir(unzip_path)
         current_working_directory = os.getcwd()
- 
+
         # Iterate over the files in the current working directory
         for file in os.listdir(current_working_directory):
             # If the file is a zip file, unzip it
@@ -47,7 +54,7 @@ class DataIngestion:
                 with open(os.path.join(current_working_directory, file), 'rb') as f:
                     zipfile.ZipFile(f).extractall()
                     logger.info(f"{file} data files extracted successfully")
- 
+
         # Deleting zipfiles            
         for file in os.listdir(current_working_directory):
             if file.endswith(".zip"):

@@ -162,11 +162,19 @@ get_merge_task = PythonOperator(
     dag=dag,
 )
 
+# Task to perform the 'get_merge' function, depends on 'get_stats_task'
+get_data_to_model_task = PythonOperator(
+    task_id='get_data_to_model_task ',
+    python_callable=call_function,
+    op_args=['src.data_pre_processing', 'get_data_to_model'],
+    dag=dag,
+)
+
 # Task to perform the 'train_model_task' function, depends on 'get_stats_task'
 train_model_task = PythonOperator(
     task_id='train_model_task',
     python_callable=call_function,
-    op_args=['../mlflow/mlflow1', 'get_merge'],
+    op_args=['../mlflow/mlflow1', 'train_model'],
     dag=dag,
 )
 
@@ -174,7 +182,7 @@ train_model_task = PythonOperator(
 register_model_task = PythonOperator(
     task_id='register_model_task',
     python_callable=call_function,
-    op_args=['../mlflow/mlflow1', 'get_merge'],
+    op_args=['../mlflow/mlflow1', 'register_model'],
     dag=dag,
 )
 

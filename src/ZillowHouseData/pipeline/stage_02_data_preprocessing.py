@@ -1,8 +1,8 @@
-from ZillowHouseData.components.data_preprocessing import DataPreprocessing
-from ZillowHouseData.logger import logger
-from ZillowHouseData.exception import CustomException
-from ZillowHouseData.config.configuration import ConfigurationManager
-from ZillowHouseData.pipeline.stage_01_data_ingestion import ingestion_stage
+from src.ZillowHouseData.components.data_preprocessing import DataPreprocessing
+from src.ZillowHouseData.logger import logger
+from src.ZillowHouseData.exception import CustomException
+from src.ZillowHouseData.config.configuration import ConfigurationManager
+from src.ZillowHouseData.pipeline.stage_01_data_ingestion import ingestion_stage
 import sys
 
 STAGE_NAME = "Data Preprocessing stage"
@@ -11,7 +11,7 @@ class DataPreprocessingTrainingPipeline:
     def __init__(self):
         pass
 
-    def main(self):
+    def data_preprocess(self):
             # Create an instance of the DataPreprocessing class
             logger.info(f">>>>>> stage {STAGE_NAME} initated <<<<<<\n\nx==========x")
             data_preprocessor = DataPreprocessing()
@@ -28,17 +28,17 @@ class DataPreprocessingTrainingPipeline:
             # Stage 4: Merge Data
             logger.info(f">>>>>> merging data <<<<<<\n\nx==========x")
             final_data = data_preprocessor.get_merge(processed_data)
-            #print(final_data.head())
+            # print(final_data.head())
             logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 
 
 
-if __name__ == '__main__':
+    def preprocessing_stage(self):
     #ingestion_stage()
-    try:
-        obj1 = DataPreprocessingTrainingPipeline()
-        obj1.main()
-    except Exception as e:
-        logger.exception(e)
-        raise CustomException(e,sys)
+        try:
+            obj1 = DataPreprocessingTrainingPipeline()
+            obj1.data_preprocess()
+        except Exception as e:
+            logger.exception(e)
+            raise CustomException(e,sys)
     

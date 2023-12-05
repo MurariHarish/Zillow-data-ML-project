@@ -1,7 +1,7 @@
 #environment Imports
 import os, sys
-from ZillowHouseData.logger import logger
-from ZillowHouseData.exception import CustomException
+from src.ZillowHouseData.logger import logger
+from src.ZillowHouseData.exception import CustomException
 import pickle
 
 #model imports
