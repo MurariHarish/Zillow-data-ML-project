@@ -21,36 +21,11 @@ STAGE_NAME = "Data Ingestion stage"
 try:
     logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
     obj = DataIngestionTrainingPipeline()
-<<<<<<< HEAD
-    obj.main()
+    obj.data_ingestion()
     logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 except Exception as e:
     logger.exception(e)
     raise CustomException(e,sys) 
-
-STAGE_NAME = "Data Preprocessing Stage"
-try:
-    logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
-    obj = DataPreprocessingTrainingPipeline()
-    obj.main()
-    logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
-except Exception as e:
-    logger.exception(e)
-    raise CustomException(e,sys)
-
-STAGE_NAME = "Data Modelling Stage"
-try:
-    logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
-    obj2 = DataModellingPipeline()
-    obj2.processing_stage()
-=======
-    obj.data_ingestion()
->>>>>>> main
-    logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
-except Exception as e:
-    logger.exception(e)
-    raise CustomException(e,sys)
-
 
 
 STAGE_NAME = "Data Preprocessing stage"
