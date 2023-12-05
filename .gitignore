@@ -12,7 +12,8 @@ mlops_zillow/*
 #Ignore dvc.lock file
 #dvc.lock
 final.csv
-
+.DS_Store
+src/.DS_Store
 /mlflow/mlruns/
 
 

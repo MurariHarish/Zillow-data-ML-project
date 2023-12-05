@@ -4,7 +4,7 @@ from src.ZillowHouseData.logger import logger
 from src.ZillowHouseData.exception import CustomException
 import sys
 
-STAGE_NAME = "Data Ingestion stage"
+STAGE_NAME = "Data Ingestion"
 
 class DataIngestionTrainingPipeline:
     def __init__(self):
