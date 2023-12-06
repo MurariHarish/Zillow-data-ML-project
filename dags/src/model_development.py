@@ -45,7 +45,7 @@ def build_model(X_train, hp):
 
     return model
 def train_model(**kwargs):
-    df = pd.read_csv(os.path.join(os.path.dirname(__file__), '../dags/data/final.csv'))
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), '../data/final.csv'))
     # Select relevant columns
     columns_to_use = ['indicator_id', 'region_id', 'year', 'month', 'CRAM', 'IRAM', 'LRAM', 'MRAM', 'NRAM', 'SRAM']
 
@@ -56,7 +56,7 @@ def train_model(**kwargs):
     # Split the data into training and testing sets
     X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    log_dir = "../tensorflow/logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    log_dir = "../../tensorflow/logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     tensorboard_callback = TensorBoard(log_dir=log_dir, histogram_freq=1, profile_batch='5,10')
 
     with mlflow.start_run(run_name='NN_models'):
@@ -138,27 +138,5 @@ def register_model(**kwargs):
             stage='Production'
         )
 
-
-
-    # model_name = 'test_model'
-    #
-    # model_version = mlflow.register_model(f"runs:/{run_id}/random_forest_model", model_name)
-    #
-    # # Registering the model takes a few seconds, so add a small delay
-    # time.sleep(15)
-
-    # client.transition_model_version_stage(
-    #     name=model_name,
-    #     version=model_version.version,
-    #     stage="Production",
-    # )
-    # print(mlflow.search_runs('attributes.status = ACTIVE').iloc[0])
-
-    # for rm in client.search_registered_models(filter_string= "current_stage= Production"):
-    #     print(dict(rm))
-
-    # for rm in client.get_latest_versions('test_model',stages=['Production']):
-    #     print(dict(rm))
-
-# train_model()
-# register_model()
+train_model()
+register_model()

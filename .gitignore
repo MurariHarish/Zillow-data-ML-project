@@ -42,3 +42,6 @@ __pycache__/
 
 mlruns/
 
+/mlflow/tuner_logs/
+/dags/src/mlruns/
+/dags/src/tuner_logs/
