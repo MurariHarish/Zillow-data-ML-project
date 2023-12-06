@@ -19,99 +19,9 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, BatchNormalization,Dropout
 from tensorflow.keras.optimizers import Adam
 from kerastuner.tuners import RandomSearch
+from tensorflow.keras.callbacks import TensorBoard
+import datetime
 
-# def model_training(hp):
-#     mlflow.xgboost.autolog()
-#     # Load the diabetes dataset.
-#
-#     df = pd.read_csv(os.path.join(os.path.dirname(__file__), '../dags/data/final.csv'))
-#     # Select relevant columns
-#     columns_to_use = ['indicator_id', 'region_id', 'year', 'month', 'CRAM', 'IRAM', 'LRAM', 'MRAM', 'NRAM', 'SRAM']
-#
-#     # Define features and target variable
-#     X = df[columns_to_use]
-#     y = df['value']
-#
-#     # Split the data into training and testing sets
-#     X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
-#
-#     # Standardize the data
-#     scaler = StandardScaler()
-#     X_train_scaled = scaler.fit_transform(X_train)
-#     X_test_scaled = scaler.transform(X_val)
-#
-#     with mlflow.start_run(nested=True):
-#         # model = Sequential()
-#         # model.add(Dense(128, activation='relu', input_shape=(X_train.shape[1],)))
-#         # model.add(BatchNormalization())
-#         # model.add(Dropout(0.5))
-#         # model.add(Dense(64, activation='relu', kernel_regularizer='l2'))
-#         # model.add(BatchNormalization())
-#         # model.add(Dropout(0.3))
-#         # model.add(Dense(32, activation='relu', kernel_regularizer='l2'))
-#         # model.add(BatchNormalization())
-#         # model.add(Dropout(0.3))
-#         # model.add(Dense(1, kernel_regularizer='l2'))
-#
-#         model = Sequential()
-#         model.add(Dense(units=hp.Int('units_1', min_value=32, max_value=256, step=32),
-#                         activation='relu', input_shape=(X_train.shape[1],)))
-#         model.add(BatchNormalization())
-#         model.add(Dropout(hp.Float('dropout_1', min_value=0.2, max_value=0.5, step=0.1)))
-#         model.add(Dense(units=hp.Int('units_2', min_value=32, max_value=128, step=32),
-#                         activation='relu', kernel_regularizer='l2'))
-#         model.add(BatchNormalization())
-#         model.add(Dropout(hp.Float('dropout_2', min_value=0.2, max_value=0.5, step=0.1)))
-#         model.add(Dense(units=hp.Int('units_3', min_value=16, max_value=64, step=16),
-#                         activation='relu', kernel_regularizer='l2'))
-#         model.add(BatchNormalization())
-#         model.add(Dropout(hp.Float('dropout_3', min_value=0.2, max_value=0.5, step=0.1)))
-#         model.add(Dense(1, kernel_regularizer='l2'))
-#
-#         # Compile the model
-#         # Compile the model
-#         model.compile(
-#             optimizer=Adam(learning_rate=hp.Float('learning_rate', min_value=1e-4, max_value=1e-2, sampling='log')),
-#             loss='mse')
-#
-#         model.fit(X_train, y_train, epochs=2, batch_size=10, verbose=5)
-#
-#
-#         # Make predictions on the test set
-#         y_pred = model.predict(X_val)
-#
-#         # Evaluate the model
-#         mse = mean_squared_error(y_val, y_pred)
-#         mlflow.log_metric('mse', mse)
-#
-#
-#         # signature = infer_signature(X_train, model.predict(X_train))
-#         mlflow.tensorflow.log_model(model, 'model')
-#
-#         return model
-#
-# def train_model(**kwargs):
-#     df = pd.read_csv(os.path.join(os.path.dirname(__file__), '../dags/data/final.csv'))
-#     # Select relevant columns
-#     columns_to_use = ['indicator_id', 'region_id', 'year', 'month', 'CRAM', 'IRAM', 'LRAM', 'MRAM', 'NRAM', 'SRAM']
-#
-#     # Define features and target variable
-#     X = df[columns_to_use]
-#     y = df['value']
-#
-#     # Split the data into training and testing sets
-#     X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
-#
-#     with mlflow.start_run(run_name='NN_models'):
-#         tuner = RandomSearch(
-#                 model_training,
-#                 objective='val_loss',
-#                 max_trials=5,  # You can adjust the number of trials
-#                 directory='tuner_logs',
-#                 project_name='neural_network_tuning')
-#                 # )
-#
-#     tuner.search(X_train, X_val, epochs=5, validation_split=0.2)
 def build_model(X_train, hp):
     model = Sequential()
     model.add(Dense(units=hp.Int('units_1', min_value=32, max_value=256, step=32),
@@ -146,10 +56,8 @@ def train_model(**kwargs):
     # Split the data into training and testing sets
     X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    print("X_train shape:", X_train.shape)
-    print("y_train shape:", y_train.shape)
-    print("X_val shape:", X_val.shape)
-    print("y_val shape:", y_val.shape)
+    log_dir = "../tensorflow/logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    tensorboard_callback = TensorBoard(log_dir=log_dir, histogram_freq=1)
 
     with mlflow.start_run(run_name='NN_models'):
         tuner = RandomSearch(
@@ -160,7 +68,7 @@ def train_model(**kwargs):
                 project_name='neural_network_tuning')
                 # )
 
-    tuner.search(X_train, y_train, epochs=5, validation_split=0.2)
+    tuner.search(X_train, y_train, epochs=5, validation_split=0.2,callbacks=[tensorboard_callback])
 
     # Get the best hyperparameters
     best_hps = tuner.get_best_hyperparameters(num_trials=1)[0]
