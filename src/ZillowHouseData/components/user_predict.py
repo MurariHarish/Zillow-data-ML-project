@@ -18,7 +18,6 @@ class Predict:
             for column in self.user_input_reqs:
                 value = input(f"Enter value for {column}: ")
                 user_input[column] = float(value) if column != 'encoded_indicator_id' else int(value)
-                print("LOL")
 
             # Convert user input to DataFrame
             user_input_df = pd.DataFrame([user_input])

@@ -9,6 +9,14 @@ data_ingestion:
 data_preprocessing:
   stats_path: ./artifacts/data_ingestion/stats.csv
   final_csv_path: ./artifacts/data_ingestion/final.csv
+  file_name: ZILLOW_DATA_962c837a6ccefddddf190101e0bafdaf.csv
+  start_date: 2012-01-01
+  interested_columns: ['indicator_id', 'region_id', 'date', 'value']
+  interested_indicators_stats: ['IRAM', 'CRAM', 'MRAM', 'LRAM', 'NRAM', 'SRAM']
+  interested_indicators_zhvi: ['ZATT', 'ZSFH', 'ZALL', 'ZCON', 'ZABT', 'Z2BR', 'Z5BR', 'Z3BR', 'Z1BR', 'Z4BR']
 
 model_training:
   final_csv_path: ./artifacts/data_ingestion/final.csv
+  
+user_predict:
+  user_input_reqs: ['encoded_indicator_id','region_id','year','month','CRAM','IRAM','LRAM','MRAM','NRAM','SRAM']

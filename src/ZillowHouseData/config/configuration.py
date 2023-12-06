@@ -40,11 +40,11 @@ class ConfigurationManager:
         data_preprocessing_config = DataPreprocessingConfig(
             stats_path=Path(config.stats_path),
             final_csv_path=Path(config.final_csv_path),
-            file_name=self.params.FILE_NAME,
-            start_date=self.params.START_DATE,
-            interested_columns=self.params.INTERESTED_COLUMNS,
-            interested_indicators_stats=self.params.INTERESTED_INDICATORS_STATS,
-            interested_indicators_zhvi=self.params.INTERESTED_INDICATORS_ZHVI
+            file_name=config.file_name,
+            start_date=config.start_date,
+            interested_columns=config.interested_columns,
+            interested_indicators_stats=config.interested_indicators_stats,
+            interested_indicators_zhvi=config.interested_indicators_zhvi
 
         )
         return data_preprocessing_config
@@ -65,8 +65,9 @@ class ConfigurationManager:
         return model_training_config
     
     def get_user_input_predic_config(self) -> UserPredictConfig:
+        config = self.config.user_predict
 
         user_predict_config = UserPredictConfig(
-            user_input_reqs=self.params.USER_INPUT_REQS
+            user_input_reqs=config.user_input_reqs
         )
         return user_predict_config

@@ -18,8 +18,6 @@ class DataPreprocessing:
         self.stats_path = self.config.stats_path
         self.final_csv_path = self.config.final_csv_path
 
-        # print(self.start_date)
-        # print(self.start_date.type())
         # Define data types for columns
         self.dtypes = {
             'indicator_id': 'object',
