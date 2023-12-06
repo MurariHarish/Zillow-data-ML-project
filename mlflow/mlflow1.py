@@ -57,7 +57,7 @@ def train_model(**kwargs):
     X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
 
     log_dir = "../tensorflow/logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    tensorboard_callback = TensorBoard(log_dir=log_dir, histogram_freq=1)
+    tensorboard_callback = TensorBoard(log_dir=log_dir, histogram_freq=1, profile_batch='5,10')
 
     with mlflow.start_run(run_name='NN_models'):
         tuner = RandomSearch(
