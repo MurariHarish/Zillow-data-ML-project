@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/abf9b5189eda4655ab0a64c69fe16c4a/artifacts
+end_time: 1701902621902
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: abf9b5189eda4655ab0a64c69fe16c4a
+run_name: bemused-doe-689
+run_uuid: abf9b5189eda4655ab0a64c69fe16c4a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1701902620587
+status: 3
+tags: []
+user_id: hm

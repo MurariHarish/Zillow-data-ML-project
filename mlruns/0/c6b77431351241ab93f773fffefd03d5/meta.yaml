@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/c6b77431351241ab93f773fffefd03d5/artifacts
+end_time: 1701902596223
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: c6b77431351241ab93f773fffefd03d5
+run_name: angry-ram-787
+run_uuid: c6b77431351241ab93f773fffefd03d5
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1701902596211
+status: 3
+tags: []
+user_id: hm

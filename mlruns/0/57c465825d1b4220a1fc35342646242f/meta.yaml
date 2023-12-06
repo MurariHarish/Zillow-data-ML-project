@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/57c465825d1b4220a1fc35342646242f/artifacts
+end_time: 1701900322276
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 57c465825d1b4220a1fc35342646242f
+run_name: capable-stag-40
+run_uuid: 57c465825d1b4220a1fc35342646242f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1701900320999
+status: 3
+tags: []
+user_id: hm

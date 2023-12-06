@@ -54,16 +54,30 @@ class ConfigurationManager:
 
         config = self.config.model_training
 
+        # model_training_config = ModelTrainingConfig(
+        #     learning_rate=self.params.LEARNING_RATE,
+        #     epochs=self.params.EPOCHS,
+        #     batch_size=self.params.BATCH_SIZE,
+        #     validation_split=self.params.VALIDATION_SPLIT,
+        #     verbose=self.params.VERBOSE,
+        #     final_csv_path=Path(config.final_csv_path)
+        # )
+
         model_training_config = ModelTrainingConfig(
+            max_depth=self.params.MAX_DEPTH,
             learning_rate=self.params.LEARNING_RATE,
-            epochs=self.params.EPOCHS,
-            batch_size=self.params.BATCH_SIZE,
-            validation_split=self.params.VALIDATION_SPLIT,
-            verbose=self.params.VERBOSE,
+            reg_alpha=self.params.REG_ALPHA,
+            reg_lambda=self.params.REG_LAMBDA,
+            min_child_weight=self.params.MIN_CHILD_WEIGHT,
+            objective=self.params.OBJECTIVE,
+            eval_metric=self.params.EVAL_METRIC,
+            n_estimators=self.params.N_ESTIMATORS,
+            random_state=self.params.RANDOM_STATE,
             final_csv_path=Path(config.final_csv_path)
         )
         return model_training_config
-    
+
+
     def get_user_input_predic_config(self) -> UserPredictConfig:
         config = self.config.user_predict
 

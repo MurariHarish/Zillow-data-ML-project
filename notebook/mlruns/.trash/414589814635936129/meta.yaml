@@ -1,0 +1,7 @@
+artifact_location: file:///Users/hm/Documents/Github_Projects/Zillow-data-ML-project/notebook/mlruns/414589814635936129
+creation_time: 1701894443498
+experiment_id: '414589814635936129'
+last_update_time: 1701900235069
+lifecycle_stage: deleted
+name: xgboost_experiment
+tags: {}

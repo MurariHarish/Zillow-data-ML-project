@@ -1,0 +1,16 @@
+artifact_uri: file:///Users/hm/Documents/Github_Projects/Zillow-data-ML-project/notebook/mlruns/414589814635936129/39868af9e58d4b19bfe71de76dcb8477/artifacts
+deleted_time: 1701899560381
+end_time: 1701895170256
+entry_point_name: ''
+experiment_id: '414589814635936129'
+lifecycle_stage: deleted
+run_id: 39868af9e58d4b19bfe71de76dcb8477
+run_name: likeable-colt-109
+run_uuid: 39868af9e58d4b19bfe71de76dcb8477
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1701895167732
+status: 3
+tags: []
+user_id: hm

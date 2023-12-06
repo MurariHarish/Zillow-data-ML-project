@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/e1a7164851374994a8db7f7d7c082915/artifacts
+end_time: 1701902620232
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: e1a7164851374994a8db7f7d7c082915
+run_name: painted-fowl-523
+run_uuid: e1a7164851374994a8db7f7d7c082915
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1701902620226
+status: 3
+tags: []
+user_id: hm

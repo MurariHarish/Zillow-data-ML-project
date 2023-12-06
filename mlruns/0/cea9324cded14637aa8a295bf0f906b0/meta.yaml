@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/cea9324cded14637aa8a295bf0f906b0/artifacts
+end_time: 1701900320742
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: cea9324cded14637aa8a295bf0f906b0
+run_name: intelligent-fowl-758
+run_uuid: cea9324cded14637aa8a295bf0f906b0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1701900320737
+status: 3
+tags: []
+user_id: hm

@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/792fa307ed8d4350839623e656c98c54/artifacts
+end_time: 1701896817613
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 792fa307ed8d4350839623e656c98c54
+run_name: capricious-swan-947
+run_uuid: 792fa307ed8d4350839623e656c98c54
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1701896817605
+status: 4
+tags: []
+user_id: hm

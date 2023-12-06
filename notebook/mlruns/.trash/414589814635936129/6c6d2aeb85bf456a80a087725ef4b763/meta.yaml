@@ -1,0 +1,16 @@
+artifact_uri: file:///Users/hm/Documents/Github_Projects/Zillow-data-ML-project/notebook/mlruns/414589814635936129/6c6d2aeb85bf456a80a087725ef4b763/artifacts
+deleted_time: 1701899560379
+end_time: 1701895263496
+entry_point_name: ''
+experiment_id: '414589814635936129'
+lifecycle_stage: deleted
+run_id: 6c6d2aeb85bf456a80a087725ef4b763
+run_name: thundering-mare-342
+run_uuid: 6c6d2aeb85bf456a80a087725ef4b763
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1701895260867
+status: 3
+tags: []
+user_id: hm
