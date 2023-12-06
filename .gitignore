@@ -40,3 +40,5 @@ __pycache__/
 ./src/ZillowHouseData/__pycache__/
 
 /mlflow/tuner_logs/
+/dags/src/mlruns/
+/dags/src/tuner_logs/
