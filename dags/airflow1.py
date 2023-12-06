@@ -162,7 +162,7 @@ get_merge_task = PythonOperator(
     dag=dag,
 )
 
-# Task to perform the 'get_merge' function, depends on 'get_stats_task'
+# Task to perform the 'get_merge' function, depends on 'get_merge_task'
 get_data_to_model_task = PythonOperator(
     task_id='get_data_to_model_task ',
     python_callable=call_function,
@@ -170,7 +170,7 @@ get_data_to_model_task = PythonOperator(
     dag=dag,
 )
 
-# Task to perform the 'train_model_task' function, depends on 'get_stats_task'
+# Task to perform the 'train_model_task' function, depends on 'get_data_to_model_task'
 train_model_task = PythonOperator(
     task_id='train_model_task',
     python_callable=call_function,
@@ -178,7 +178,7 @@ train_model_task = PythonOperator(
     dag=dag,
 )
 
-# Task to perform the 'register_model_task' function, depends on 'get_stats_task'
+# Task to perform the 'register_model_task' function, depends on 'train_model_task'
 register_model_task = PythonOperator(
     task_id='register_model_task',
     python_callable=call_function,

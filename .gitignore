@@ -39,3 +39,4 @@ __pycache__/
 ./src/ZillowHouseData/components/__pycache__/
 ./src/ZillowHouseData/__pycache__/
 
+/mlflow/tuner_logs/
