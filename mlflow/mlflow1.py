@@ -124,13 +124,11 @@ def register_model(**kwargs):
 
     except:
 
-
         client.transition_model_version_stage(
             name=model_name,
             version=new_model_version.version,
             stage='Production'
         )
-
 
 
     # model_name = 'test_model'

@@ -12,10 +12,10 @@ mlops_zillow/*
 #Ignore dvc.lock file
 #dvc.lock
 final.csv
+
+/mlflow/mlruns/
 .DS_Store
 src/.DS_Store
-/mlflow/mlruns/
-
 
 __pycache__/
 ./src/ZillowHouseData/pipeline/__pycache__ 

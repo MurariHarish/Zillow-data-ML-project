@@ -1,8 +1,14 @@
 artifacts_root: artifacts
 
-
 data_ingestion:
   root_dir: artifacts/data_ingestion
   source_URL: https://drive.google.com/file/d/1MfTc_wxSmPrkQqb8a25pv6ciKiRYCND1/view?usp=sharing
   local_data_file: artifacts/data_ingestion/zillow_files.zip
   unzip_dir: artifacts/data_ingestion
+
+data_preprocessing:
+  stats_path: ./artifacts/data_ingestion/stats.csv
+  final_csv_path: ./artifacts/data_ingestion/final.csv
+
+model_training:
+  final_csv_path: ./artifacts/data_ingestion/final.csv

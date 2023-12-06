@@ -1,69 +1,72 @@
 #environment Imports
 import os, sys, pickle
-from src.ZillowHouseData.logger import logger
+# from src.ZillowHouseData.logger import logger
 from src.ZillowHouseData.exception import CustomException
-from sklearn.preprocessing import LabelEncoder
+# from sklearn.preprocessing import LabelEncoder
+from src.ZillowHouseData.entity.config_entity import ModelTrainingConfig
 
 #model imports
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
+# import pandas as pd
+# from sklearn.model_selection import train_test_split
+# from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, BatchNormalization,Dropout
 from tensorflow.keras.optimizers import Adam
 
 class DataModeling:
-    def __init__(self, file_path):
-        self.file_path = file_path
-        self.X_train = None
-        self.X_test = None
-        self.y_train = None
-        self.y_test = None
+        
+    def __init__(self, config: ModelTrainingConfig):
+        self.config = config
+        self.learning_rate = self.config.learning_rate
+        self.epochs = self.config.epochs
+        self.batch_size = self.config.batch_size
+        self.validation_split = self.config.validation_split
+        self.verbose = self.config.verbose
+    
+    # def read_csv_to_dataframe(self):
+    #     try:
+    #         df = pd.read_csv(self.file_path)
+    #         return df
+    #     except Exception as e:
+    #         raise CustomException(e, sys)
 
-    def read_csv_to_dataframe(self):
-        try:
-            df = pd.read_csv(self.file_path)
-            return df
-        except Exception as e:
-            raise CustomException(e, sys)
-
-    def prepare_data(self, df):
-        try:
+    # def prepare_data(self, df):
+    #     try:
             
-            # Encoding indicator_id
-            label_encoder = LabelEncoder()
-            df['encoded_indicator_id'] = label_encoder.fit_transform(df['indicator_id'])
-            df.drop(['Unnamed: 0','indicator_id'], axis=1, inplace= True)
+    #         # Encoding indicator_id
+    #         label_encoder = LabelEncoder()
+    #         df['encoded_indicator_id'] = label_encoder.fit_transform(df['indicator_id'])
+    #         df.drop(['Unnamed: 0','indicator_id'], axis=1, inplace= True)
 
-            # Select relevant columns
-            columns_to_use = ['encoded_indicator_id', 'region_id', 'year', 'month', 'CRAM', 'IRAM', 'LRAM', 'MRAM', 'NRAM', 'SRAM']
+    #         # Select relevant columns
+    #         columns_to_use = ['encoded_indicator_id', 'region_id', 'year', 'month', 'CRAM', 'IRAM', 'LRAM', 'MRAM', 'NRAM', 'SRAM']
 
-            # Define features and target variable
-            X = df[columns_to_use]
-            y = df['value']
+    #         # Define features and target variable
+    #         X = df[columns_to_use]
+    #         y = df['value']
 
-            return X, y
+    #         return X, y
 
-        except Exception as e:
-            raise CustomException(e, sys)     
+    #     except Exception as e:
+    #         raise CustomException(e, sys)     
 
-    def train_test_split(self, X, y):
-        # Split the data into training and testing sets
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    # def train_test_split(self, X, y):
+    #     # Split the data into training and testing sets
+    #     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-        # Store X_train, X_test  as attributes
-        self.X_train = X_train
-        self.X_test = X_test
-        self.y_train = y_train
-        self.y_test = y_test
+    #     # Store X_train, X_test  as attributes
+    #     self.X_train = X_train
+    #     self.X_test = X_test
+    #     self.y_train = y_train
+    #     self.y_test = y_test
 
-        # Standardize the data
-        scaler = StandardScaler()
-        X_train_scaled = scaler.fit_transform(X_train)
-        X_test_scaled = scaler.transform(X_test)
+    #     # Standardize the data
+    #     scaler = StandardScaler()
+    #     X_train_scaled = scaler.fit_transform(X_train)
+    #     X_test_scaled = scaler.transform(X_test)
 
-        return X_train_scaled, X_test_scaled, y_train, y_test, scaler
+    #     return X_train_scaled, X_test_scaled, y_train, y_test, scaler
 
     def build_model(self, input_shape):
         try:
@@ -80,24 +83,38 @@ class DataModeling:
             model.add(Dense(1, kernel_regularizer='l2'))
 
             # Compile the model
-            model.compile(optimizer=Adam(learning_rate=0.001), loss='mse')
+            model.compile(optimizer=Adam(learning_rate=self.learning_rate), loss='mse')
 
             return model
 
         except Exception as e:
             raise CustomException(e, sys)
-        
-    def train_model(self, model, X_train, y_train, epochs=1, batch_size=32, validation_split=0.1):
+
+    def train_model(self, model, X_train, y_train):
         try:
 
             # Train the model
-            model.fit(X_train, y_train, epochs=epochs, batch_size=batch_size, validation_split=validation_split, verbose=2)
+            model.fit(X_train, y_train, epochs=self.epochs, batch_size=self.batch_size, validation_split=self.validation_split, verbose=self.verbose)
 
             return model
 
         except Exception as e:
             raise CustomException(e, sys)
 
+
+    # def save_model_to_keras(self, keras_model, save_folder, file_name):
+    #     try:
+    #         # Create the full save path, including the "artifacts/" folder
+    #         save_path = os.path.join("artifacts", save_folder, file_name)
+
+    #         # Create the directory if it doesn't exist
+    #         os.makedirs(os.path.dirname(save_path), exist_ok=True)
+
+    #         keras_model.save(save_path)
+
+    #         print(f"Model saved to {save_path}")
+    #     except Exception as e:
+    #         print(f"Error saving the model: {str(e)}")
     # def predict_sample(self, model, scaler):
     #     try:
     #         if self.X_test is None:

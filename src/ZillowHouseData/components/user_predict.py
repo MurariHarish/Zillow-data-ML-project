@@ -2,16 +2,20 @@ import sys
 import pandas as pd
 from src.ZillowHouseData.logger import logger
 from src.ZillowHouseData.exception import CustomException
+from src.ZillowHouseData.entity.config_entity import UserPredictConfig
+
 
 class Predict:
-     def __init__(self):
-          pass
+
+    def __init__(self, config: UserPredictConfig):
+          self.config = config
+          self.user_input_reqs = self.config.user_input_reqs
      
-     def predict_user_input(self, model, scaler):
+    def predict_user_input(self, model, scaler):
         try:
             # Get user input for each column in X_train
             user_input = {}
-            for column in self.X_train.columns:
+            for column in self.user_input_reqs:
                 value = input(f"Enter value for {column}: ")
                 user_input[column] = float(value) if column != 'encoded_indicator_id' else int(value)
                 print("LOL")

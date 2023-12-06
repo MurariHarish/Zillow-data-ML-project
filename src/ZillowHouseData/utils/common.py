@@ -1,11 +1,15 @@
-import os, pickle, keras
-import yaml
-from src.ZillowHouseData.logger import logger
+import os, sys, pickle, keras, yaml
+import pandas as pd
 from ensure import ensure_annotations
 from box import ConfigBox
 from pathlib import Path
 from typing import Any
-import base64
+
+from src.ZillowHouseData.logger import logger
+from src.ZillowHouseData.exception import CustomException
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 
 
 @ensure_annotations
@@ -28,7 +32,7 @@ def read_yaml(path_to_yaml: Path) -> ConfigBox:
             logger.info(f"yaml file: {path_to_yaml} loaded successfully")
             return ConfigBox(content)
     except Exception as e:
-        raise e
+        raise CustomException(e, sys)
 
 
 @ensure_annotations
@@ -105,3 +109,49 @@ def save_object_to_pickle(object_to_save, save_folder, file_name):
         print(f"Model saved to {save_path}")
     except Exception as e:
         print(f"Error saving the model: {str(e)}")
+
+
+def read_csv_to_dataframe(file_path):
+    try:
+        df = pd.read_csv(file_path)
+        return df
+    except Exception as e:
+        raise CustomException(e, sys)
+
+
+def prepare_data(df):
+    try:
+        
+        # Encoding indicator_id
+        label_encoder = LabelEncoder()
+        df['encoded_indicator_id'] = label_encoder.fit_transform(df['indicator_id'])
+        df.drop(['Unnamed: 0','indicator_id'], axis=1, inplace= True)
+
+        # Select relevant columns
+        columns_to_use = ['encoded_indicator_id', 'region_id', 'year', 'month', 'CRAM', 'IRAM', 'LRAM', 'MRAM', 'NRAM', 'SRAM']
+
+        # Define features and target variable
+        X = df[columns_to_use]
+        y = df['value']
+
+        return X, y
+
+    except Exception as e:
+        raise CustomException(e, sys)     
+
+def train_and_test_split(X, y):
+    # Split the data into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+    # Store X_train, X_test  as attributes
+    X_train = X_train
+    X_test = X_test
+    y_train = y_train
+    y_test = y_test
+
+    # Standardize the data
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
+
+    return X_train_scaled, X_test_scaled, y_train, y_test, scaler
