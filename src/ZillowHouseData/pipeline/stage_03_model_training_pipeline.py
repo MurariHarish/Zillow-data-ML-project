@@ -13,11 +13,6 @@ class DataModellingPipeline:
     def __init__(self):
         pass
 
-    # def __init__(self, config: ModelTrainingConfig):
-    #     self.config = config
-    #     self.file_path = self.config.final_csv_path
-    
-    # file_path = "final_csv_path"
     def data_model(self):
         # Create an instance of the Modelling class   
         logger.info(f">>>>>> stage {STAGE_NAME} initiated <<<<<<\n\nx==========x")
@@ -55,14 +50,6 @@ class DataModellingPipeline:
 
         save_object_to_pickle(model, "models", "model.pkl")
         logger.info(">>>>>> Saved model as pickle <<<<<<\n\nx==========x")
-
-        # logger.info(f">>>>>> Prediction <<<<<<\n\nx==========x")
-        # # Predict on a sample
-        # data_modeling.predict_sample(model, scaler)
-
-        # logger.info(f">>>>>> User prediction <<<<<<\n\nx==========x")
-        # # Predict using user input
-        # data_modeling.predict_user_input(model, scaler)
 
     def modelling_stage(self):
         try:

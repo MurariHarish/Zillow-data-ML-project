@@ -2,7 +2,7 @@ from src.ZillowHouseData.logger import logger
 from src.ZillowHouseData.exception import CustomException
 from src.ZillowHouseData.components.model_evaluate import ModelEvaluate
 from src.ZillowHouseData.utils.common import load_keras_model, load_pickle_object
-# from src.ZillowHouseData.config.configuration import ConfigurationManager
+from src.ZillowHouseData.config.configuration import ConfigurationManager
 import sys
 
 STAGE_NAME = "Model Evaluation"
@@ -19,10 +19,13 @@ class ModelEvaluatePipeline:
 
         X_test_scaled = load_pickle_object("models", "X_test_scaled.pkl")
         y_test = load_pickle_object("models", "y_test.pkl")
+        run_id = load_pickle_object("models", "run_id.pkl")
         logger.info(">>>>>> Loaded X_test and y_test successfully<<<<<<\n\nx==========x")
 
         # Evaluate model
-        model_evaluate = ModelEvaluate()
+        config = ConfigurationManager()
+        model_evaluation_config = config.get_model_evaluation_config()
+        model_evaluate = ModelEvaluate(config=model_evaluation_config)
         mse = model_evaluate.evaluate_model(loaded_model, X_test_scaled, y_test)
         logger.info(f">>>>>> Model validation completed with MSE {mse} <<<<<<\n\nx==========x")
 

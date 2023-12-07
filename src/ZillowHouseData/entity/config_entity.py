@@ -41,6 +41,11 @@ class ModelTrainingConfig:
     random_state: int
     final_csv_path: Path
 
+
+@dataclass(frozen=True)
+class ModelEvaluationConfig:
+    mlflow_uri: str
+
 @dataclass(frozen=True)
 class UserPredictConfig:
     user_input_reqs: List[str]

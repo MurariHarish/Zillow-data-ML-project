@@ -66,6 +66,7 @@ from urllib.parse import urlparse
 from src.ZillowHouseData.logger import logger
 from src.ZillowHouseData.exception import CustomException
 from src.ZillowHouseData.entity.config_entity import ModelTrainingConfig
+from src.ZillowHouseData.utils.common import save_object_to_pickle
 
 
 class DataModeling:
@@ -97,24 +98,15 @@ class DataModeling:
                 'n_estimators': self.n_estimators,
                 'random_state': self.random_state
             }
-            mlflow_uri = "https://dagshub.com/MurariHarish/Zillow-data-ML-project.mlflow"
-            mlflow.set_registry_uri(mlflow_uri)
-            tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
 
-            # mlflow.set_tracking_uri("http://localhost:5000")
-
-            with mlflow.start_run():
-            # Log parameters
-                mlflow.log_params(params)
+            save_object_to_pickle(params, "models", "params.pkl")
             # Train the model
             model = xgb.XGBRegressor(**params)
             model.fit(X_train, y_train)
-
             # Log model
-            mlflow.xgboost.log_model(model, "model")
 
             return model
-
+        
         except Exception as e:
             raise CustomException(e, sys)
 
