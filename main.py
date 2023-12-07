@@ -18,28 +18,28 @@ from src.ZillowHouseData.pipeline.stage_05_user_predict_pipeline import UserPred
 #     logger.info("Divide by zero")
 #     raise CustomException(e,sys)
 
-# STAGE_NAME = "Data Ingestion"
+STAGE_NAME = "Data Ingestion"
 
-# try:
-#     logger.info(f">>>>>> Stage {STAGE_NAME} started <<<<<<")
-#     obj = DataIngestionTrainingPipeline()
-#     obj.data_ingestion()
-#     logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
-# except Exception as e:
-#     logger.exception(e)
-#     raise CustomException(e,sys) 
+try:
+    logger.info(f">>>>>> Stage {STAGE_NAME} started <<<<<<")
+    obj = DataIngestionTrainingPipeline()
+    obj.data_ingestion()
+    logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+except Exception as e:
+    logger.exception(e)
+    raise CustomException(e,sys) 
 
 
-# STAGE_NAME = "Data Preprocessing "
+STAGE_NAME = "Data Preprocessing "
 
-# try:
-#     logger.info(f">>>>>> Stage {STAGE_NAME} started <<<<<<")
-#     obj = DataPreprocessingTrainingPipeline()
-#     obj.preprocessing_stage()
-#     logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
-# except Exception as e:
-#     logger.exception(e)
-#     raise CustomException(e,sys)
+try:
+    logger.info(f">>>>>> Stage {STAGE_NAME} started <<<<<<")
+    obj = DataPreprocessingTrainingPipeline()
+    obj.preprocessing_stage()
+    logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+except Exception as e:
+    logger.exception(e)
+    raise CustomException(e,sys)
 
 
 STAGE_NAME = "Data Modelling"
