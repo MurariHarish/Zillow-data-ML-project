@@ -51,10 +51,13 @@ class DataModellingPipeline:
         save_model_to_keras(model, "models", "model.keras")
         logger.info(">>>>>> Saved model as pickle <<<<<<\n\nx==========x")
 
-    def modelling_stage(self):
-        try:
-            obj2 = DataModellingPipeline()
-            obj2.data_model()
-        except Exception as e:
-            logger.exception(e)
-            raise CustomException(e, sys)
+
+if __name__ == '__main__':
+    try:
+        logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
+        obj2 = DataModellingPipeline()
+        obj2.data_model()
+        logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+    except Exception as e:
+        logger.exception(e)
+        raise CustomException(e,sys)

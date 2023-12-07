@@ -195,3 +195,7 @@ xgboost==2.0.1
 yarl==1.9.3
 zipp==3.17.0
 dvc
+ensure
+python-box
+gdown
+chardet

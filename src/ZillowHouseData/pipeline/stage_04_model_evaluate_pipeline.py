@@ -27,11 +27,13 @@ class ModelEvaluatePipeline:
         model_evaluate = ModelEvaluate(config=model_evaluation_config)
         mse = model_evaluate.evaluate_model(loaded_model, X_test_scaled, y_test)
         logger.info(f">>>>>> Model validation completed with MSE {mse} <<<<<<\n\nx==========x")
-
-    def evaluation_stage(self):
-        try:
-            obj3 = ModelEvaluatePipeline()
-            obj3.data_evaluate()
-        except Exception as e:
-            logger.exception(e)
-            raise CustomException(e, sys)
+        
+if __name__ == '__main__':
+    try:
+        logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
+        obj3 = ModelEvaluatePipeline()
+        obj3.data_evaluate()
+        logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+    except Exception as e:
+        logger.exception(e)
+        raise CustomException(e,sys)

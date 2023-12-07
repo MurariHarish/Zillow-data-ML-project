@@ -1,12 +1,12 @@
 stages:
   data_ingestion:
-    cmd: 
-      - python src/ZillowHouseData/pipeline/stage_01_data_ingestion_pipeline.py
+    cmd: python src/ZillowHouseData/pipeline/stage_01_data_ingestion_pipeline.py
     deps:
       - src/ZillowHouseData/pipeline/stage_01_data_ingestion_pipeline.py
       - config/config.yaml
     outs:
       - artifacts/data_ingestion
+
 
   data_preprocessing:
     cmd: 
@@ -31,8 +31,8 @@ stages:
       - BATCH_SIZE
       - VALIDATION_SPLIT
       - VERBOSE
-    # outs:
-    #   - artifacts/models
+    outs:
+      - artifacts/models
 
   model_evaluation:
     cmd:
