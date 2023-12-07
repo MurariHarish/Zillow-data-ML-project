@@ -199,3 +199,6 @@ ensure
 python-box
 gdown
 chardet
+pytest
+
+mock
