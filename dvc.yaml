@@ -26,17 +26,13 @@ stages:
       - artifacts/data_ingestion
       - config/config.yaml
     params:
-      - MAX_DEPTH
       - LEARNING_RATE
-      - REG_ALPHA
-      - REG_LAMBDA
-      - MIN_CHILD_WEIGHT
-      - OBJECTIVE
-      - EVAL_METRIC
-      - N_ESTIMATORS
-      - RANDOM_STATE
-    outs:
-      - artifacts/models
+      - EPOCHS
+      - BATCH_SIZE
+      - VALIDATION_SPLIT
+      - VERBOSE
+    # outs:
+    #   - artifacts/models
 
   model_evaluation:
     cmd:
