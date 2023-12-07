@@ -64,15 +64,15 @@ except Exception as e:
     logger.exception(e)
     raise CustomException(e,sys)
 
-STAGE_NAME = "User Prediction"
+# STAGE_NAME = "User Prediction"
 
-try:
-    logger.info(f">>>>>> Stage {STAGE_NAME} started <<<<<<")
-    obj4 = UserPredictPipeline()
-    obj4.user_predict()
-    logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
-except Exception as e:
-    logger.exception(e)
-    raise CustomException(e,sys)
+# try:
+#     logger.info(f">>>>>> Stage {STAGE_NAME} started <<<<<<")
+#     obj4 = UserPredictPipeline()
+#     obj4.user_predict()
+#     logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+# except Exception as e:
+#     logger.exception(e)
+#     raise CustomException(e,sys)
 
-#-----------------------------------------------------------------------------------------
+# #-----------------------------------------------------------------------------------------

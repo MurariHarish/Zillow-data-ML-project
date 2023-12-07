@@ -17,6 +17,9 @@ data_preprocessing:
 
 model_training:
   final_csv_path: ./artifacts/data_ingestion/final.csv
+
+model_evaluate:
+  mlflow_uri: "https://dagshub.com/MurariHarish/Zillow-data-ML-project.mlflow"
   
 user_predict:
   user_input_reqs: ['encoded_indicator_id','region_id','year','month','CRAM','IRAM','LRAM','MRAM','NRAM','SRAM']

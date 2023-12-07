@@ -4,6 +4,7 @@ from src.ZillowHouseData.utils.common import create_directories, read_yaml
 from src.ZillowHouseData.entity.config_entity import DataIngestionConfig
 from src.ZillowHouseData.entity.config_entity import DataPreprocessingConfig
 from src.ZillowHouseData.entity.config_entity import ModelTrainingConfig
+from src.ZillowHouseData.entity.config_entity import ModelEvaluationConfig
 from src.ZillowHouseData.entity.config_entity import UserPredictConfig
 
 class ConfigurationManager:
@@ -77,6 +78,15 @@ class ConfigurationManager:
         )
         return model_training_config
 
+
+    def get_model_evaluation_config(self) -> ModelEvaluationConfig:
+        config = self.config.model_evaluate
+
+        model_evaluate_config = ModelEvaluationConfig(
+            mlflow_uri = config.mlflow_uri
+        )
+
+        return model_evaluate_config
 
     def get_user_input_predic_config(self) -> UserPredictConfig:
         config = self.config.user_predict
