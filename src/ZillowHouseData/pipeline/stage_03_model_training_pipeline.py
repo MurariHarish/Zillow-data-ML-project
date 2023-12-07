@@ -40,15 +40,15 @@ class DataModellingPipeline:
         model_training_config = config.get_model_training_config()
         data_modeling = DataModeling(config = model_training_config)
 
-        # # Build model
-        # model = data_modeling.build_model(X_train_scaled.shape[1])
-        # logger.info(">>>>>> Model building completed<<<<<<\n\nx==========x")
+        # Build model
+        model = data_modeling.build_model(X_train_scaled.shape[1])
+        logger.info(">>>>>> Model building completed<<<<<<\n\nx==========x")
 
         logger.info(">>>>>> Train model <<<<<<\n\nx==========x")
-        model = data_modeling.train_model(X_train_scaled, y_train)
+        model = data_modeling.train_model(model, X_train_scaled, y_train)
         logger.info(">>>>>> Model training completed<<<<<<\n\nx==========x")
 
-        save_object_to_pickle(model, "models", "model.pkl")
+        save_model_to_keras(model, "models", "model.keras")
         logger.info(">>>>>> Saved model as pickle <<<<<<\n\nx==========x")
 
     def modelling_stage(self):

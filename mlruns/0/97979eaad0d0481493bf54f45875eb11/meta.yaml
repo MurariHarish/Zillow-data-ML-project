@@ -1,8 +1,9 @@
 artifact_uri: mlflow-artifacts:/0/97979eaad0d0481493bf54f45875eb11/artifacts
+deleted_time: 1701963139700
 end_time: 1701900043359
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: 97979eaad0d0481493bf54f45875eb11
 run_name: mysterious-steed-610
 run_uuid: 97979eaad0d0481493bf54f45875eb11

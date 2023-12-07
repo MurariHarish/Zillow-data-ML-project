@@ -21,25 +21,25 @@ class DataPreprocessingConfig:
     final_csv_path: Path
 
 @dataclass(frozen=True)
-# class ModelTrainingConfig:
-    # learning_rate: float
-    # epochs: int
-    # batch_size: int
-    # validation_split: float
-    # verbose: int
-    # final_csv_path: Path
-
 class ModelTrainingConfig:
-    max_depth: int
     learning_rate: float
-    reg_alpha: float
-    reg_lambda: int
-    min_child_weight: int
-    objective: str
-    eval_metric: str
-    n_estimators: int
-    random_state: int
+    epochs: int
+    batch_size: int
+    validation_split: float
+    verbose: int
     final_csv_path: Path
+
+# class ModelTrainingConfig:
+#     max_depth: int
+#     learning_rate: float
+#     reg_alpha: float
+#     reg_lambda: int
+#     min_child_weight: int
+#     objective: str
+#     eval_metric: str
+#     n_estimators: int
+#     random_state: int
+#     final_csv_path: Path
 
 
 @dataclass(frozen=True)

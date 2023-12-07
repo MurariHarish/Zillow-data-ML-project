@@ -14,12 +14,11 @@ class ModelEvaluatePipeline:
     def data_evaluate(self):
         
         logger.info(f">>>>>> stage {STAGE_NAME} initiated <<<<<<\n\nx==========x")
-        loaded_model = load_pickle_object("models", "model.pkl")
+        loaded_model = load_keras_model("models", "model.keras")
         logger.info(">>>>>> Loaded saved model successfully<<<<<<\n\nx==========x")
 
         X_test_scaled = load_pickle_object("models", "X_test_scaled.pkl")
         y_test = load_pickle_object("models", "y_test.pkl")
-        run_id = load_pickle_object("models", "run_id.pkl")
         logger.info(">>>>>> Loaded X_test and y_test successfully<<<<<<\n\nx==========x")
 
         # Evaluate model

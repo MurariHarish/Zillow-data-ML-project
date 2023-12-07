@@ -194,3 +194,4 @@ WTForms==3.0.1
 xgboost==2.0.1
 yarl==1.9.3
 zipp==3.17.0
+dvc

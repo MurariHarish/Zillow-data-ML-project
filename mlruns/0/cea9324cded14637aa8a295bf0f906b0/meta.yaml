@@ -1,8 +1,9 @@
 artifact_uri: mlflow-artifacts:/0/cea9324cded14637aa8a295bf0f906b0/artifacts
+deleted_time: 1701963139697
 end_time: 1701900320742
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: cea9324cded14637aa8a295bf0f906b0
 run_name: intelligent-fowl-758
 run_uuid: cea9324cded14637aa8a295bf0f906b0
