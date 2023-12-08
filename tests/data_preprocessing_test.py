@@ -7,11 +7,13 @@ from src.ZillowHouseData.entity.config_entity import DataPreprocessingConfig
 def data_preprocessing_config(tmpdir):
     # Create a sample DataPreprocessingConfig with test paths
     test_file = str(tmpdir.join("pytest_sample_data.csv"))
+    region_test_file = str(tmpdir.join("pytest_region_sample_data.csv"))
     stats_path = str(tmpdir.join("stats.csv"))
     final_csv_path = str(tmpdir.join("final.csv"))
 
     config = DataPreprocessingConfig(
         file_name=test_file,
+        region_file_name = region_test_file,
         start_date="2020-01-01",
         interested_columns=['date', 'region_id', 'indicator_id', 'value'], 
         interested_indicators_stats=['Z4BR', 'ZABT'],  
