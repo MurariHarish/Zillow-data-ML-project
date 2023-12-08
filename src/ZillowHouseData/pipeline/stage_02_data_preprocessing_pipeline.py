@@ -20,9 +20,9 @@ class DataPreprocessingTrainingPipeline:
             logger.info(">>>>>> Parsing and Filtering data <<<<<<\n\nx==========x")
             load_df = data_preprocessor.read_and_filter_data()
 
-            logger.info(">>>>>> exact year & month <<<<<<\n\nx==========x")
+            logger.info(">>>>>> extract year & month <<<<<<\n\nx==========x")
             filter_df = data_preprocessor.get_year_month(load_df)
-
+            filter_df.to_csv('artifacts/data_ingestion/filter_df.csv')
             logger.info(">>>>>> get stats <<<<<<\n\nx==========x")
             stats_df = data_preprocessor.get_stats(filter_df)
 
