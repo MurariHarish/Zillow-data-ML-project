@@ -24,7 +24,8 @@ class DataModellingPipeline:
 
         logger.info(f">>>>>> Preparing data fror training <<<<<<\n\nx==========x")
         # Preprocess data
-        X, y = prepare_data(df)
+        X, y, label_to_category_mapping = prepare_data(df)
+        save_object_to_pickle(label_to_category_mapping, "models", "label")
 
         #Train test Split
         X_train_scaled, X_test_scaled, y_train, y_test, scaler = train_and_test_split(X, y)

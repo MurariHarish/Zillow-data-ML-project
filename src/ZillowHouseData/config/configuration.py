@@ -42,6 +42,7 @@ class ConfigurationManager:
             stats_path=Path(config.stats_path),
             final_csv_path=Path(config.final_csv_path),
             file_name=config.file_name,
+            region_file_name = config.region_file_name,
             start_date=config.start_date,
             interested_columns=config.interested_columns,
             interested_indicators_stats=config.interested_indicators_stats,

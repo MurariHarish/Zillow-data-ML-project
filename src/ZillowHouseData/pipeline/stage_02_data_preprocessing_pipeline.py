@@ -1,8 +1,10 @@
+import sys
 from src.ZillowHouseData.components.data_preprocessing import DataPreprocessing
 from src.ZillowHouseData.logger import logger
 from src.ZillowHouseData.exception import CustomException
 from src.ZillowHouseData.config.configuration import ConfigurationManager
-import sys
+from src.ZillowHouseData.utils.common import save_object_to_pickle
+
 
 STAGE_NAME = "Data Preprocessing stage"
 
@@ -28,6 +30,9 @@ class DataPreprocessingTrainingPipeline:
 
             logger.info(">>>>>> merging data <<<<<<\n\nx==========x")
             final_data = data_preprocessor.get_merge(stats_df, filter_df)
+
+            region_id_region_dict = data_preprocessor.extract_unique_regions(final_data)
+            save_object_to_pickle(region_id_region_dict, "models", "region_label")
             
             logger.info(f">>>>>> stage {STAGE_NAME}completed <<<<<<\n\nx==========x")
     
