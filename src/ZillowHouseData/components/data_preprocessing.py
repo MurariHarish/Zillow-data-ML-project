@@ -12,7 +12,9 @@ class DataPreprocessing:
     def __init__(self, config: DataPreprocessingConfig):
         self.config = config
         self.file_name = self.config.file_name
-        self.file_name = os.path.join('artifacts', 'data_ingestion', self.file_name)
+        self.file_path = os.path.join('artifacts', 'data_ingestion', self.file_name)
+        self.region_file_name = self.config.region_file_name
+        self.region_file_path = os.path.join('artifacts', 'data_ingestion', self.region_file_name)
         self.start_date = self.config.start_date
         self.interested_columns = self.config.interested_columns
         self.interested_indicators_stats = self.config.interested_indicators_stats
@@ -33,6 +35,11 @@ class DataPreprocessing:
         try:
             chunks = pd.read_csv(self.file_name, usecols=['indicator_id', 'region_id', 'date', 'value'],
                                 dtype=self.dtypes, chunksize=chunk_size)
+
+        # Read the CSV file
+            df = pd.read_csv(self.file_path, usecols= self.interested_columns, dtype=self.dtypes)
+            start_date_pd = pd.to_datetime(self.start_date)
+
 
             filtered_chunks = []
             for chunk_number, chunk in enumerate(chunks, start=1):
@@ -124,3 +131,32 @@ class DataPreprocessing:
     #         return final_df
     #     except Exception as e:
     #         raise CustomException(e, sys)
+
+    
+    def extract_unique_regions(self, df):
+        """
+        Reads a CSV file, merges it with a given DataFrame on 'region_id',
+        extracts and sorts unique 'region_id' and 'region', and returns a dictionary for region_id to region lookup.
+
+        :param df: DataFrame to merge with the CSV data.
+        :return: Dictionary for region_id to region lookup.
+        """
+        try:
+            # Read CSV file
+            df_regions = pd.read_csv(self.region_file_path)
+
+            # Merge the provided DataFrame with the CSV data
+            df_region_merge = pd.merge(df, df_regions, on='region_id', how='inner')
+
+            # Extract unique 'region_id' and 'region', and reset the index
+            unique_regions_df = df_region_merge[['region_id', 'region']].drop_duplicates(subset=['region_id', 'region'])
+
+            # Sort the DataFrame based on 'region'
+            sorted_unique_regions_df = unique_regions_df.sort_values(by='region').reset_index(drop=True)
+
+            # Convert sorted DataFrame to dictionary for region_id to region lookup
+            region_id_to_region = dict(zip(sorted_unique_regions_df['region_id'], sorted_unique_regions_df['region']))
+
+            return region_id_to_region
+        except Exception as e:
+            raise CustomException(e, sys)

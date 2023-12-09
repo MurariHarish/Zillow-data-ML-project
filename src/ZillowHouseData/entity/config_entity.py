@@ -13,6 +13,7 @@ class DataIngestionConfig:
 @dataclass(frozen=True)
 class DataPreprocessingConfig:
     file_name: str
+    region_file_name: str
     start_date: str
     interested_columns: List[str]
     interested_indicators_stats: List[str]

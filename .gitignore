@@ -10,7 +10,7 @@ artifacts/*
 ml_zillow/*
 
 #Ignore dvc.lock file
-# dvc.lock
+dvc.lock
 final.csv
 
 /mlflow/mlruns/

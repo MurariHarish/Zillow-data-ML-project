@@ -3,14 +3,15 @@ artifacts_root: artifacts
 data_ingestion:
   root_dir: artifacts/data_ingestion
   source_URL: https://drive.google.com/file/d/1WqpLl5PbrhODaj4WuBB5tDvNCpQDm8MW/view?usp=sharing
+  source_URL: https://drive.google.com/file/d/1WqpLl5PbrhODaj4WuBB5tDvNCpQDm8MW/view
   local_data_file: artifacts/data_ingestion/zillow_files.zip
   unzip_dir: artifacts/data_ingestion
-
 
 data_preprocessing:
   stats_path: ./artifacts/data_ingestion/stats.csv
   final_csv_path: ./artifacts/data_ingestion/final.csv
   file_name: ZILLOW_DATA_962c837a6ccefddddf190101e0bafdaf.csv
+  region_file_name: ZILLOW_REGIONS_1a51d107db038a83ac171d604cb48d5b.csv
   start_date: 2012-01-01
   interested_columns: ['indicator_id', 'region_id', 'date', 'value']
   interested_indicators_stats: ['IRAM', 'CRAM', 'MRAM', 'LRAM', 'NRAM', 'SRAM']
