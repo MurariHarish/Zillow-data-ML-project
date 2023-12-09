@@ -33,7 +33,7 @@ class DataPreprocessing:
     def read_and_filter_data(self, chunk_size=10000):
         # Read the CSV file in chunks
         try:
-            chunks = pd.read_csv(self.file_name, usecols=['indicator_id', 'region_id', 'date', 'value'],
+            chunks = pd.read_csv(self.file_path, usecols=['indicator_id', 'region_id', 'date', 'value'],
                                 dtype=self.dtypes, chunksize=chunk_size)
 
         # Read the CSV file
