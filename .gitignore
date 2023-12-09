@@ -7,7 +7,7 @@ logs/
 
 artifacts/*
 
-mlops_zillow/*
+ml_zillow/*
 
 #Ignore dvc.lock file
 dvc.lock
@@ -45,3 +45,9 @@ mlruns/
 /mlflow/tuner_logs/
 /dags/src/mlruns/
 /dags/src/tuner_logs/
+
+
+airflow-webserver.pid
+airflow.cfg
+airflow-worker.pid
+webserver_config.py

@@ -58,6 +58,11 @@ def load_keras_model(load_folder, file_name):
         # Load the keras model file
         loaded_model = keras.models.load_model(load_path)
 
+        logger.info(">>>>>> model details for me to see inside common.py : <<<<<<\n\nx==========x")
+        model_details = loaded_model.summary()
+        logger.info(">>>>>> Model Summary <<<<<<\n\nx==========x")
+        logger.info(model_details)
+
         return loaded_model
 
     except Exception as e:
@@ -117,6 +122,29 @@ def read_csv_to_dataframe(file_path):
         return df
     except Exception as e:
         raise CustomException(e, sys)
+
+
+def prepare_data(df):
+    try:
+        
+        # Encoding indicator_id
+        label_encoder = LabelEncoder()
+        df['encoded_indicator_id'] = label_encoder.fit_transform(df['indicator_id'])
+        #df.drop(['Unnamed: 0','indicator_id'], axis=1, inplace= True)
+        df.drop(['indicator_id'], axis=1, inplace= True)
+
+        # Select relevant columns
+        columns_to_use = ['encoded_indicator_id', 'region_id', 'year', 'month', 'CRAM', 'IRAM', 'LRAM', 'MRAM', 'NRAM', 'SRAM']
+
+        # Define features and target variable
+        X = df[columns_to_use]
+        y = df['value']
+
+        return X, y
+
+    except Exception as e:
+        raise CustomException(e, sys)     
+
 
 def train_and_test_split(X, y):
     # Split the data into training and testing sets

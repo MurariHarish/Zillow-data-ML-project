@@ -31,9 +31,13 @@ class DataPreprocessingTrainingPipeline:
             logger.info(">>>>>> merging data <<<<<<\n\nx==========x")
             final_data = data_preprocessor.get_merge(stats_df, filter_df)
 
+            logger.info(f">>>>>> final_data.head(5) <<<<<<\n\nx==========x")
+            logger.info(final_data.head(5))
+
+
             region_id_region_dict = data_preprocessor.extract_unique_regions(final_data)
             save_object_to_pickle(region_id_region_dict, "models", "region_label")
-            
+
             logger.info(f">>>>>> stage {STAGE_NAME}completed <<<<<<\n\nx==========x")
     
 if __name__ == '__main__':

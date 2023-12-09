@@ -18,6 +18,11 @@ class ModelEvaluate:
     
     def evaluate_model(self, model, X_test, y_test):
         try:
+            logger.info(">>>>>> model details for me to see inside evaluate_model : <<<<<<\n\nx==========x")
+            model_details = model.summary()
+            logger.info(">>>>>> Model Summary <<<<<<\n\nx==========x")
+            logger.info(model_details)
+
         # Make predictions on the test set
             y_pred = model.predict(X_test)
 
