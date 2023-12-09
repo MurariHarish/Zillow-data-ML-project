@@ -28,7 +28,9 @@ class DataPreprocessingTrainingPipeline:
 
             logger.info(">>>>>> merging data <<<<<<\n\nx==========x")
             final_data = data_preprocessor.get_merge(stats_df, filter_df)
-            
+            logger.info(f">>>>>> final_data.head(5) <<<<<<\n\nx==========x")
+            logger.info(final_data.head(5))
+
             logger.info(f">>>>>> stage {STAGE_NAME}completed <<<<<<\n\nx==========x")
     
 if __name__ == '__main__':
