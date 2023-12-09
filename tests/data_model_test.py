@@ -3,53 +3,54 @@ import os
 from unittest.mock import patch, Mock
 import pytest
 from src.ZillowHouseData.components.model_training import DataModeling
-from src.ZillowHouseData.pipeline.model_training_pipeline import DataModellingPipeline
+from src.ZillowHouseData.pipeline.stage_03_model_training_pipeline import DataModellingPipeline
 
 @pytest.fixture
-def mock_load_csv_to_dataframe():
-    with patch("src.ZillowHouseData.pipeline.model_training_pipeline.read_csv_to_dataframe") as mock_load:
-        yield mock_load
+def test_data_model(self):
+    # Create an instance of the Modelling class   
+    
+    file_path = os.path.join('artifacts', 'data_ingestion', 'final.csv')
 
-@pytest.fixture
-def mock_prepare_data():
-    with patch("src.ZillowHouseData.pipeline.model_training_pipeline.prepare_data") as mock_prepare:
-        yield mock_prepare
+    # Read data
+    df = read_csv_to_dataframe(file_path)
+    #logger.info(">>>>>> CSV read <<<<<<\n\nx==========x")
 
-@pytest.fixture
-def mock_train_and_test_split():
-    with patch("src.ZillowHouseData.pipeline.model_training_pipeline.train_and_test_split") as mock_split:
-        yield mock_split
+    #logger.info(f">>>>>> Preparing data fror training <<<<<<\n\nx==========x")
+    # Preprocess data
+def test_prepare_data(tmpdir):   
+    X, y = prepare_data(df)
 
-@pytest.fixture
-def mock_save_object_to_pickle():
-    with patch("src.ZillowHouseData.pipeline.model_training_pipeline.save_object_to_pickle") as mock_save:
-        yield mock_save
+def test_train_and_test_split(tmpdir)
+    #Train test Split
+    X_train_scaled, X_test_scaled, y_train, y_test, scaler = train_and_test_split(X, y)
+    #logger.info(">>>>>> Test train split completed <<<<<<\n\nx==========x")
 
-@pytest.fixture
-def mock_modeling():
-    with patch("src.ZillowHouseData.pipeline.model_training_pipeline.DataModeling") as mock_modeling:
-        yield mock_modeling
+    save_object_to_pickle( X_test_scaled, "models", "X_test_scaled.pkl")
+    save_object_to_pickle( y_test, "models", "y_test.pkl")
+    save_object_to_pickle(scaler, "models", "scaler.pkl")
+    #logger.info(">>>>>> Saved X_test and y_test as pickle for model evaluation <<<<<<\n\nx==========x")
 
-def test_data_model(mock_load_csv_to_dataframe, mock_prepare_data, mock_train_and_test_split, mock_save_object_to_pickle, mock_modeling):
-    # Set up mocks
-    mock_load_csv_to_dataframe.return_value = Mock()  # Provide a DataFrame for testing
-    mock_prepare_data.return_value = (Mock(), Mock())  # Provide X and y for testing
-    mock_train_and_test_split.return_value = (Mock(), Mock(), Mock(), Mock(), Mock())  # Provide split data for testing
-    mock_modeling_instance = mock_modeling.return_value
-    mock_modeling_instance.build_model.return_value = Mock()  # Provide a model for testing
 
-    # Run the pipeline
-    pipeline = DataModellingPipeline()
-    pipeline.data_model()
+    config = ConfigurationManager()
+    model_training_config = config.get_model_training_config()
+    data_modeling = DataModeling(config = model_training_config)
 
-    # Assertions
-    mock_load_csv_to_dataframe.assert_called_once_with(os.path.join('artifacts', 'data_ingestion', 'final.csv'))
-    mock_prepare_data.assert_called_once_with(mock_load_csv_to_dataframe.return_value)
-    mock_train_and_test_split.assert_called_once_with(mock_prepare_data.return_value[0], mock_prepare_data.return_value[1])
-    mock_modeling.assert_called_once_with(config=Mock())
-    mock_modeling_instance.build_model.assert_called_once_with(mock_train_and_test_split.return_value[0].shape[1])
-    mock_modeling_instance.train_model.assert_called_once_with(mock_modeling_instance.build_model.return_value, *mock_train_and_test_split.return_value[:2])
-    mock_save_object_to_pickle.assert_called_with(*mock_train_and_test_split.return_value[:2], "models", "X_test_scaled.pkl")
-    mock_save_object_to_pickle.assert_called_with(mock_train_and_test_split.return_value[3], "models", "y_test.pkl")
-    mock_save_object_to_pickle.assert_called_with(mock_train_and_test_split.return_value[4], "models", "scaler.pkl")
-    mock_modeling_instance.save_model_to_keras.assert_called_once_with(mock_modeling_instance.train_model.return_value, "models", "model.keras")
+def test_build_model():
+    # Build model
+    model = data_modeling.build_model(X_train_scaled.shape[1])
+    #logger.info(">>>>>> Model building completed<<<<<<\n\nx==========x")
+
+def test_train_model():
+    #logger.info(">>>>>> Train model <<<<<<\n\nx==========x")
+    model = data_modeling.train_model(model, X_train_scaled, y_train)
+    #logger.info(">>>>>> Model training completed<<<<<<\n\nx==========x")
+
+def test_summary():
+    #logger.info(">>>>>> model details for me to see : <<<<<<\n\nx==========x")
+    model_details = model.summary()
+    #logger.info(">>>>>> Model Summary <<<<<<\n\nx==========x")
+    #logger.info(model_details)
+
+def test_save_model_to_keras():
+    save_model_to_keras(model, "models", "model.keras")
+    #logger.info(">>>>>> Saved model as pickle <<<<<<\n\nx==========x")
