@@ -49,9 +49,9 @@ class DataModellingPipeline:
         model = data_modeling.train_model(model, X_train_scaled, y_train)
         logger.info(">>>>>> Model training completed<<<<<<\n\nx==========x")
 
-        logger.info(">>>>>> model details for me to see : <<<<<<\n\nx==========x")
+        logger.info(">>>>>> Model Summary <<<<<<\n\nx==========x\n")
         model_details = model.summary()
-        logger.info(">>>>>> Model Summary <<<<<<\n\nx==========x")
+        logger.info(">>>>>> Model Summary <<<<<<\n\nx==========x\n\n")
         logger.info(model_details)
 
         save_model_to_keras(model, "models", "model.keras")
