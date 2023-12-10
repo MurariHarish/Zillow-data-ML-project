@@ -140,7 +140,7 @@ def prepare_data(df):
         X = df[columns_to_use]
         y = df['value']
 
-        return X, y
+        return X, y, label_encoder
 
     except Exception as e:
         raise CustomException(e, sys)     
@@ -171,8 +171,12 @@ def prepare_data(df):
         df['encoded_indicator_id'] = label_encoder.fit_transform(df['indicator_id'])
         # Create the mapping dictionary
         label_to_category_mapping = dict(zip(df['encoded_indicator_id'], df['indicator_id']))
-        df.drop(['Unnamed: 0','indicator_id'], axis=1, inplace= True)
-
+        #df.drop(['Unnamed: 0','indicator_id'], axis=1, inplace= True)
+        if 'Unnamed: 0' in df.columns:
+            df.drop(['Unnamed: 0', 'indicator_id'], axis=1, inplace=True)
+        else:
+            df.drop(['indicator_id'], axis=1, inplace=True)
+            
         # Select relevant columns
         columns_to_use = ['encoded_indicator_id', 'region_id', 'year', 'month', 'CRAM', 'IRAM', 'LRAM', 'MRAM', 'NRAM', 'SRAM']
 

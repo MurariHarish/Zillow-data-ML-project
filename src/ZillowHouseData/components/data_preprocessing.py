@@ -33,14 +33,14 @@ class DataPreprocessing:
     def read_and_filter_data(self, chunk_size=10000):
         # Read the CSV file in chunks
         try:
+            logger.info(">>>>>> filename data <<<<<<\n\nx==========x")
+            logger.info(self.file_name)
+            logger.info(">>>>>> path data <<<<<<\n\nx==========x")
+            logger.info(self.file_path)
+
             chunks = pd.read_csv(self.file_path, usecols=['indicator_id', 'region_id', 'date', 'value'],
                                 dtype=self.dtypes, chunksize=chunk_size)
-
-        # Read the CSV file
-            df = pd.read_csv(self.file_path, usecols= self.interested_columns, dtype=self.dtypes)
-            start_date_pd = pd.to_datetime(self.start_date)
-
-
+            
             filtered_chunks = []
             for chunk_number, chunk in enumerate(chunks, start=1):
                 #logger.info(f"Processing Chunk {chunk_number}")
