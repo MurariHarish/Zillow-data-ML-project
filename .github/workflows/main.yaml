@@ -1,4 +1,4 @@
-name: workflow
+name: Continuous Integration and Deployment
 
 on:
   push:
