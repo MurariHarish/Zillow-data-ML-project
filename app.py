@@ -1,10 +1,11 @@
+import os
 import pandas as pd
 from flask import Flask, render_template, request
 from src.ZillowHouseData.utils.common import load_pickle_object
 from src.ZillowHouseData.pipeline.stage_05_user_predict_pipeline import UserPredictPipeline
 
 app = Flask(__name__)
-predict_pipeline = UserPredictPipeline()  # Instantiate once
+predict_pipeline = UserPredictPipeline()
 
 def parse_form_data(request_form):
     """
@@ -60,6 +61,12 @@ def predict_datapoint():
         app.logger.error(f"Error in prediction: {str(e)}")
         return render_template('index.html', error=str(e))
 
+@app.route("/train", methods=['GET','POST'])
+def trainRoute():
+    os.system("python main.py")
+    # os.system("dvc repro")
+    return "Training done successfully!"
+
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=8080)
