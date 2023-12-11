@@ -84,7 +84,7 @@ jobs:
       
       - name: Pull latest images
         run: |
-         docker pull ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
+         docker pull 612108117034.dkr.ecr.us-east-1.amazonaws.com/zillowhousepriceprediction/zillowhousepriceprediction:latest
          
       - name: Stop and remove container if running
         run: |
