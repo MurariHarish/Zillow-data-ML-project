@@ -200,7 +200,6 @@ The tools used in our project include:
 - DVC (Data Version Control)
 - Amazon Web Services (AWS)
 - MLflow
-- TensorFlow
 - Flask
 
 # GitHub Actions Configuration for MLOps
