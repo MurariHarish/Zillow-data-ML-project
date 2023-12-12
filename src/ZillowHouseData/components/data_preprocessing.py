@@ -98,44 +98,6 @@ class DataPreprocessing:
         except Exception as e:
             raise CustomException(e,sys)
 
-    # def optimize_memory_usage(self, df):
-    #     # Optimize memory usage for individual DataFrame
-    #     df['year'] = df['date'].dt.year.astype('int16')
-    #     df['month'] = df['date'].dt.month.astype('int8')
-    #     return df
-
-    # def get_merge(self, df_stats, df_month_year):
-    #     try:
-    #         logger.info(f">>>>>> test1 <<<<<<\n\nx==========x")
-    #         # Filter the DataFrame in-place instead of creating a new one
-    #         interested_indicators_ZHVI = self.interested_indicators_zhvi
-    #         df_month_year = df_month_year[df_month_year['indicator_id'].isin(interested_indicators_ZHVI)]
-
-    #         logger.info(f">>>>>> test2 <<<<<<\n\nx==========x")
-    #         # Specify the data types to minimize memory usage
-    #         dtype_dict = {'region_id': 'int32', 'year': 'int16', 'month': 'int8'}
-    #         df_stats = df_stats.astype(dtype_dict)
-    #         df_month_year = df_month_year.astype(dtype_dict)
-
-    #         logger.info(f">>>>>> test3 <<<<<<\n\nx==========x")
-    #         # Explicitly specify 'inner' join to reduce memory consumption
-    #         final_df = pd.merge(df_month_year, df_stats, on=['region_id', 'year', 'month'], how='inner')
-
-    #         logger.info(f">>>>>> test4 <<<<<<\n\nx==========x")
-    #         # Save the CSV file with minimal memory usage settings
-    #         final_df.to_csv(self.final_csv_path, index=False, float_format='%.2f')
-
-    #         # Log a message indicating that the CSV file has been saved
-    #         logger.info(f">>>>>> Saved final.csv to {self.final_csv_path} <<<<<<\n\nx==========x")
-
-    #         logger.info(f">>>>>> filter_df Delete <<<<<<\n\nx==========x")    
-    #         filter_df_csv_path = 'artifacts/data_ingestion/filter_df.csv'
-    #         os.remove(filter_df_csv_path)
-
-    #         return final_df
-    #     except Exception as e:
-    #         raise CustomException(e, sys)
-
     
     def extract_unique_regions(self, df):
         """
