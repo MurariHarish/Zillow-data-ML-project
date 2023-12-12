@@ -203,8 +203,56 @@ The tools used in our project include:
 - TensorFlow
 - Flask
 
-## GitHub Actions
-GitHub Actions is a CI/CD platform that automates your software workflows. It integrates with GitHub repositories to execute a series of commands after a specified event has occurred, such as pushing new code to a repository. This tool is critical for automating tests and deployment strategies, ensuring that our software is robust and reliable.
+# GitHub Actions Configuration for MLOps
+
+## Workflows Overview
+
+GitHub Actions is a CI/CD platform that automates the software workflows. The project leverages GitHub Actions to automate our development and deployment pipelines. Two distinct workflows are configured to trigger upon new commits to the main branch, ensuring a robust and continuous integration and deployment (CI/CD) process.
+
+### Testing Workflow ` Workflow: Python application test`
+
+The first workflow, designated for testing, is initiated by any `push` or `pull_request` event. It encompasses the following steps:
+
+- **Setup**: Checks out the code and sets up Python 3.10.
+- **Dependency Installation**: Upgrades `pip`, installs `pytest`, and any necessary packages defined in `requirements.txt`.
+- **Execution of Tests**: Runs tests using `pytest` to ensure code integrity with each new change.
+
+## Deployment Workflow
+
+The second workflow is centered around continuous integration and deployment. This workflow is automatically triggered upon any `push` to the `main` branch, with an exception in place to ignore changes made to the `README.md` file.
+
+### Continuous Integration
+
+The workflow begins with the *Continuous Integration* job, which involves:
+
+- **Code Checkout**: The latest version of the code is retrieved from the repository.
+- **Code Linting**: Static code analysis is performed to identify potential improvements and ensure code quality.
+- **Unit Testing**: Automated tests are run to verify the functionality of the code.
+
+### Continuous Delivery
+
+Upon successful integration, the *Continuous Delivery* job takes over with the following steps:
+
+- **AWS Configuration**: Sets up the AWS credentials necessary for accessing AWS services.
+- **ECR Login**: Authenticates to Amazon Elastic Container Registry (ECR) to enable image push and pull.
+- **Docker Operations**: Builds the Docker image, tags it appropriately, and then pushes this image to Amazon ECR.
+
+### Continuous Deployment
+
+The final phase of the workflow is the *Continuous Deployment* job, which operates on a self-hosted runner and executes the following tasks:
+
+- **Image Deployment**: Pulls the latest Docker image from Amazon ECR.
+- **Container Management**: Runs the Docker container to serve the application to users.
+- **System Pruning**: Cleans up the system by removing any unused Docker images and containers to maintain a clean deployment environment.
+
+
+
+
+
+
+
+
+
 
 ## Docker
 Docker is a containerization platform that packages an application and its dependencies in a virtual container that can run on any Linux server. This provides flexibility and portability on where the application can run, whether on-premises, in public cloud, or in a private cloud. Docker streamlines the development lifecycle by allowing developers to work in standardized environments using local containers which provide your applications and services.
