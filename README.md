@@ -187,3 +187,44 @@ Zillow-data-ML-project/
 ```
 ## Data Processing Pipeline Flowchart
 ![Data Processing Pipeline Flowchart](Data_Pipeline_Flow.jpeg)
+
+# MLOps Tools Overview
+
+In our project, we employ a suite of advanced tools to streamline our machine learning operations (MLOps). Each tool plays a critical role in the development, deployment, and maintenance of our machine learning models.
+
+The tools used in our project include:
+
+- GitHub Actions
+- Docker
+- Apache Airflow
+- DVC (Data Version Control)
+- Amazon Web Services (AWS)
+- MLflow
+- TensorFlow
+- Flask
+
+## GitHub Actions
+GitHub Actions is a CI/CD platform that automates your software workflows. It integrates with GitHub repositories to execute a series of commands after a specified event has occurred, such as pushing new code to a repository. This tool is critical for automating tests and deployment strategies, ensuring that our software is robust and reliable.
+
+## Docker
+Docker is a containerization platform that packages an application and its dependencies in a virtual container that can run on any Linux server. This provides flexibility and portability on where the application can run, whether on-premises, in public cloud, or in a private cloud. Docker streamlines the development lifecycle by allowing developers to work in standardized environments using local containers which provide your applications and services.
+
+## Apache Airflow
+Apache Airflow is an open-source tool that helps to schedule and orchestrate complex data pipelines. By defining workflows as code, they can be more dynamic, maintainable, and transparent. We use Airflow to ensure that the right tasks are executed at the right time, handling dependencies across our data pipeline.
+
+## DVC (Data Version Control)
+DVC brings agility, traceability, and reproducibility to data science projects. It enables you to track changes in data, code, and machine learning models, and it integrates seamlessly into existing Git workflows. DVC is used in our project to handle large data files, data sets, machine learning models, and metrics associated with the models.
+
+## Amazon Web Services (AWS)
+Amazon Web Services offers a broad set of global cloud-based products including compute, storage, databases, analytics, networking, and more. In our project, AWS provides reliable, scalable, and inexpensive cloud computing services. We utilize AWS to deploy and manage our machine learning models, as well as to handle various aspects of data storage and processing.
+
+## MLflow
+MLflow is an open-source platform to manage the ML lifecycle, including experimentation, reproducibility, and deployment. It offers four primary functions: tracking experiments to record and compare parameters and results, packaging ML code in a reproducible way, managing and deploying models from a variety of ML libraries, and centralizing model storage. We leverage MLflow to track our experiments and manage the deployment of models into production.
+
+## TensorFlow
+TensorFlow is an end-to-end open-source platform for machine learning. It has a comprehensive, flexible ecosystem of tools, libraries, and community resources that lets researchers push the state-of-the-art in ML, and developers easily build and deploy ML-powered applications. In our project, TensorFlow is used to build and train our neural network models.
+
+## Flask
+Flask is a micro web framework written in Python. It's simple and easy to use, making it an excellent choice for prototyping and building web applications. We use Flask to create APIs for our machine learning models, allowing them to be easily accessed by other applications or services.
+
+
