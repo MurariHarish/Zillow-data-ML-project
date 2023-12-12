@@ -149,3 +149,39 @@ Initialize and start Airflow services using Docker Compose:
 docker compose up airflow-init
 docker compose up
 ```
+
+## Project Folder Structure
+
+Here's an overview of the folder structure for the project:
+
+```plaintext
+Zillow-data-ML-project-2/
+├── artifacts/
+│   ├── models/
+│   │   └── [model files]
+├── dags/
+│   ├── airflow_main.py
+├── config/
+│   └── config.yaml
+├── .github/
+│   └── workflows/
+│       └── [workflow files]
+├── templates/
+│   └── index.html
+├── notebook/
+│   └── [jupyter notebooks]
+├── src/
+│   └── ZillowHouseData/
+│       ├── pipeline/
+│       ├── config/
+│       ├── entity/
+│       ├── constants/
+│       ├── utils/
+│       └── components/
+├── main.py
+├── app.py
+├── setup.py
+├── params.yaml
+├── requirements.txt
+
+```
