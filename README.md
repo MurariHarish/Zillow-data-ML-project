@@ -209,7 +209,7 @@ The tools used in our project include:
 
 GitHub Actions is a CI/CD platform that automates the software workflows. The project leverages GitHub Actions to automate our development and deployment pipelines. Two distinct workflows are configured to trigger upon new commits to the main branch, ensuring a robust and continuous integration and deployment (CI/CD) process.
 
-### Testing Workflow ` Workflow: Python application test`
+### `Workflow: Python application test`
 
 The first workflow, designated for testing, is initiated by any `push` or `pull_request` event. It encompasses the following steps:
 
@@ -217,7 +217,7 @@ The first workflow, designated for testing, is initiated by any `push` or `pull_
 - **Dependency Installation**: Upgrades `pip`, installs `pytest`, and any necessary packages defined in `requirements.txt`.
 - **Execution of Tests**: Runs tests using `pytest` to ensure code integrity with each new change.
 
-## Deployment Workflow
+## `Workflow: Continuous Integration and Deployment`
 
 The second workflow is centered around continuous integration and deployment. This workflow is automatically triggered upon any `push` to the `main` branch, with an exception in place to ignore changes made to the `README.md` file.
 
