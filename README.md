@@ -216,7 +216,7 @@ The first workflow, designated for testing, is initiated by any `push` or `pull_
 - **Dependency Installation**: Upgrades `pip`, installs `pytest`, and any necessary packages defined in `requirements.txt`.
 - **Execution of Tests**: Runs tests using `pytest` to ensure code integrity with each new change.
 
-## `Workflow: Continuous Integration and Deployment`
+### `Workflow: Continuous Integration and Deployment`
 
 The second workflow is centered around continuous integration and deployment. This workflow is automatically triggered upon any `push` to the `main` branch, with an exception in place to ignore changes made to the `README.md` file.
 
