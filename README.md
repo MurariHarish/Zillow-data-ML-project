@@ -229,15 +229,9 @@ The prediction pipeline is integrated into a Flask web application, providing an
 - `/`: The main endpoint that renders the prediction form and displays the predicted result.
 - `/train`: Endpoint to initiate the model training process.
 
-## Deployment
-
-The Flask application is containerized, allowing it to be deployed easily in various environments, from local machines to cloud-based services.
-
 ## Local Development
 
-For local development and testing, the application can be run on `localhost` with the command:
-
-```python app.py```
+For local development and testing, the application can be run on `localhost` with the command: ```python app.py```
 
 ## Webpage
 ![webpage](templates/webpage.png)
