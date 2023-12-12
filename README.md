@@ -155,7 +155,7 @@ docker compose up
 Here's an overview of the folder structure for the project:
 
 ```plaintext
-Zillow-data-ML-project-2/
+Zillow-data-ML-project/
 ├── artifacts/
 │   ├── models/
 │   │   └── [model files]
