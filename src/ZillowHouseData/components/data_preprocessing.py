@@ -87,7 +87,11 @@ class DataPreprocessing:
             final_df.to_csv(self.final_csv_path)
             logger.info(f">>>>>> Saved final.csv to {self.final_csv_path} <<<<<<\n\nx==========x")
 
-            
+            if os.path.exists(self.file_path):
+                os.remove(self.file_path)
+                print(f"The file '{self.file_path}' has been deleted.")
+            else:
+                print(f"The file '{self.file_path}' does not exist.")
 
             return final_df
         
