@@ -202,7 +202,10 @@ Zillow-data-ML-project/
 ## Data Processing Pipeline Flowchart
 ![Data Processing Pipeline Flowchart](Data_Pipeline_Flow.jpeg)
 
-# Model Deployement Pipeline
+# User Predict Pipeline
+
+
+# Model Deployment Pipeline
 
 ## GitHub Actions Configuration for MLOps
 
