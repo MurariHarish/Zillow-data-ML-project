@@ -8,37 +8,35 @@ The Zillow Real Estate Data (ZILLOW) data feed provides comprehensive real estat
 
 Zillow, a leader in real estate and rental marketplaces, is dedicated to empowering consumers with data, inspiration, and knowledge about their living spaces, and connecting them with top local professionals for assistance.
 
-## Delivery
-
-- **Frequency:** Monthly
-- **Update Schedule:** Weekly updates every Sunday by 1PM UTC
-
 ## Coverage & Data Organization
 
 ### Coverage
 
-This data feed includes 56 indicators across 3 categories:
+This data feed includes 10 indicators across 3 categories:
 - Home Values
 - Rentals
 - Sales and Inventories
 
-It covers over 78,200 regions in the U.S.
+The covers over 700 regions in the U.S.
 
 ### Data Organization
 
-Regions are categorized into the following types:
-- **State**
-- **County**
+The Project focussess on following Categories
 - **Metro Area & USA**
-- **City**
-- **Neighborhood**
-- **Zip Code**
-
-Note: The entire USA is categorized under 'metro' region type with the USA region code as 102001.
 
 ## Access
 
 This product is accessible via the Nasdaq Data Link's Tables API.
+Link: https://data.nasdaq.com/databases/ZILLOW
+
+API Access: https://data.nasdaq.com/api/v3/datatables/ZILLOW/DATA?qopts.export=true&api_key={API_KEY}
+Note: Update {API_KEY} accordingly
+
+Python Access:
+
+import quandl
+quandl.ApiConfig.api_key = KZKszyVge9Ra3s4BnynH
+quandl.get_table('ZILLOW/DATA')
 
 ## Tables and Columns
 
