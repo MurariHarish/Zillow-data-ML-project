@@ -93,7 +93,7 @@ Features comprise 3 various sets of indicators.
 - **Step-04: train the model by passing the X_train and y_train as arguments with learning rates and epochs passed from the ModelTrainingConfig class from the file configentity.
 - **Step-05: Save the models directory as model.keras
 
-## User Installation
+## User Installation Guide
 
 Welcome to the Zillow Data ML Project! Follow these instructions to get this project running on your local machine for development and testing. If you're planning on deploying this project in a live environment, refer to our deployment guidelines.
 
