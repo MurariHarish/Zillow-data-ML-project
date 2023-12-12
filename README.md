@@ -27,16 +27,34 @@ The Project focussess on following Categories
 ## Access
 
 This product is accessible via the Nasdaq Data Link's Tables API.
-Link: https://data.nasdaq.com/databases/ZILLOW
 
-API Access: https://data.nasdaq.com/api/v3/datatables/ZILLOW/DATA?qopts.export=true&api_key={API_KEY}
-Note: Update {API_KEY} accordingly
+- **Web Access:** [Zillow Data on Nasdaq Data Link](https://data.nasdaq.com/databases/ZILLOW)
 
-Python Access:
+- **API Access:**
+  ```plaintext
+  https://data.nasdaq.com/api/v3/datatables/ZILLOW/DATA?qopts.export=true&api_key={API_KEY}
+  ```
+  Replace `{API_KEY}` with your actual API key.
 
+### Python Access:
+
+To access this data using Python, you can use the Quandl library. First, install the library using pip if you haven't already:
+
+```bash
+pip install quandl
+```
+
+Then, you can use the following script to access the data:
+
+```python
 import quandl
-quandl.ApiConfig.api_key = KZKszyVge9Ra3s4BnynH
-quandl.get_table('ZILLOW/DATA')
+quandl.ApiConfig.api_key = '{API_KEY}'  # Replace with your actual API key
+data = quandl.get_table('ZILLOW/DATA')
+print(data)
+```
+
+Note: Ensure you replace `{API_KEY}` with your actual Quandl API key.
+
 
 ## Tables and Columns
 
