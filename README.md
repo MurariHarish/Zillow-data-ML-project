@@ -221,7 +221,7 @@ The first workflow, designated for testing, is initiated by any `push` or `pull_
 
 The second workflow is centered around continuous integration and deployment. This workflow is automatically triggered upon any `push` to the `main` branch, with an exception in place to ignore changes made to the `README.md` file.
 
-### Continuous Integration
+## Continuous Integration
 
 The workflow begins with the *Continuous Integration* job, which involves:
 
