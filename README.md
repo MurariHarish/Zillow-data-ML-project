@@ -202,7 +202,42 @@ Zillow-data-ML-project/
 ## Data Processing Pipeline Flowchart
 ![Data Processing Pipeline Flowchart](templates/workflow.jpeg)
 
-# User Predict Pipeline
+# User Prediction Pipeline
+
+## Overview
+
+The `UserPredictPipeline` class is the core of our prediction infrastructure. It loads a pre-trained Keras model and a scaler object, both used to process user inputs and make predictions.
+
+To predict a new data point, the user fills out a web form with the necessary indicators and submits it. The Flask application parses this input and uses the `UserPredictPipeline` to generate a prediction.
+
+### Prediction Process
+
+Upon receiving input from the user, the pipeline performs the following steps:
+
+1. **User Input Processing**: Transforms the raw user input into a format suitable for prediction.
+2. **Prediction**: Uses the model and scaler to predict the output based on the user input.
+
+### Web Application Integration
+
+The prediction pipeline is integrated into a Flask web application, providing an interactive user interface for input submission and result display. The application handles:
+
+- **Data Point Prediction**: A web form captures user input, which is then parsed, validated, and fed into the prediction pipeline.
+- **Training Invocation**: An endpoint is exposed to trigger model retraining, allowing for continuous improvement of the prediction model.
+
+## Endpoints
+
+- `/`: The main endpoint that renders the prediction form and displays the predicted result.
+- `/train`: Endpoint to initiate the model training process.
+
+## Deployment
+
+The Flask application is containerized, allowing it to be deployed easily in various environments, from local machines to cloud-based services.
+
+## Local Development
+
+For local development and testing, the application can be run on `localhost` with the command:
+
+```python app.py```
 
 
 # Model Deployment Pipeline
