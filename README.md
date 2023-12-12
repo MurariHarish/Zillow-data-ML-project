@@ -150,7 +150,7 @@ docker compose up airflow-init
 docker compose up
 ```
 
-## Project Folder Structure
+## Project Pipeline Structure
 
 Here's an overview of the folder structure for the project:
 
