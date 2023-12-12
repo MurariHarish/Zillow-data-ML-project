@@ -200,7 +200,7 @@ Zillow-data-ML-project/
 
 ```
 ## Data Processing Pipeline Flowchart
-![Data Processing Pipeline Flowchart](Data_Pipeline_Flow.jpeg)
+![Data Processing Pipeline Flowchart](templates/workflow.jpeg)
 
 # User Predict Pipeline
 
