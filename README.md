@@ -96,6 +96,20 @@ Before you begin, ensure you have the following tools installed and ready:
 - **DVC**: Data Version Control, to manage and version the datasets and ML models.
 - **Git/GitHub**: To clone the repository and manage the project's source code.
 
+# MLOps Tools Overview
+
+In our project, we employ a suite of advanced tools to streamline our machine learning operations (MLOps). Each tool plays a critical role in the development, deployment, and maintenance of our machine learning models.
+
+The tools used in our project include:
+
+- GitHub Actions
+- Docker
+- Apache Airflow
+- DVC (Data Version Control)
+- Amazon Web Services (AWS)
+- MLflow
+- Flask
+
 ### Installation Steps
 
 #### 1. Cloning the Repository
@@ -188,23 +202,9 @@ Zillow-data-ML-project/
 ## Data Processing Pipeline Flowchart
 ![Data Processing Pipeline Flowchart](Data_Pipeline_Flow.jpeg)
 
-# MLOps Tools Overview
+# Model Deployement Pipeline
 
-In our project, we employ a suite of advanced tools to streamline our machine learning operations (MLOps). Each tool plays a critical role in the development, deployment, and maintenance of our machine learning models.
-
-The tools used in our project include:
-
-- GitHub Actions
-- Docker
-- Apache Airflow
-- DVC (Data Version Control)
-- Amazon Web Services (AWS)
-- MLflow
-- Flask
-
-# GitHub Actions Configuration for MLOps
-
-## Workflows Overview
+## GitHub Actions Configuration for MLOps
 
 GitHub Actions is a CI/CD platform that automates the software workflows. The project leverages GitHub Actions to automate our development and deployment pipelines. Two distinct workflows are configured to trigger upon new commits to the main branch, ensuring a robust and continuous integration and deployment (CI/CD) process.
 
