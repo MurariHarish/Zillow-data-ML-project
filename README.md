@@ -238,6 +238,8 @@ The Flask application is containerized, allowing it to be deployed easily in var
 For local development and testing, the application can be run on `localhost` with the command:
 
 ```python app.py```
+
+## Webpage
 ![webpage](templates/webpage.png)
 
 # Model Deployment Pipeline
