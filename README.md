@@ -326,7 +326,7 @@ The final phase of the workflow is the *Continuous Deployment* job, which operat
 ## AWS configuration for MLOps
 Following is comprehensive walkthrough for how I deployed the application using AWS services with the integration of GitHub Actions. It covers the entire process from setting up necessary AWS resources to configuring GitHub Actions for seamless CI/CD.
 
-![CICD flow](templates/cicd-flow.png)
+![CICD flow](templates/CICD-flow.png)
 
 ## Getting Started
 
