@@ -21,7 +21,7 @@ default_args = {
 }
 
 dag = DAG(
-    'Airlow_test_5',
+    'Airlow_main',
     default_args=default_args,
     description='Zillow Data Pipeline',
     schedule_interval=None,

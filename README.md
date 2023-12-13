@@ -148,22 +148,6 @@ Install all the required Python packages:
 pip install -r requirements.txt
 ```
 
-#### 4. Docker Configuration
-
-Set up Docker environment variables:
-
-```commandline
-echo -e "AIRFLOW_UID=$(id -u)" > .env
-echo "AIRFLOW_HOME_DIR=$(pwd)" >> .env
-```
-
-Initialize and start Airflow services using Docker Compose:
-
-```commandline
-docker compose up airflow-init
-docker compose up
-```
-
 ## Project Pipeline Structure
 
 Here's an overview of the folder structure for the project:
@@ -209,8 +193,8 @@ The `DataIngestionPipeline` script orchestrates the data ingestion process for a
 
 Data Ingestion Pipeline Overview
 The data ingestion pipeline involves two main components:
-stage_01_data_ingestion_pipeline.py
-data_ingestion.py
+- `**stage_01_data_ingestion_pipeline.py**`
+- `**data_ingestion.py**`
 
 Steps:
 - Data Ingestion Pipeline Execution (stage_01_data_ingestion.py):
@@ -221,13 +205,14 @@ Steps:
   Download File: Fetches the data from the specified URL using the gdown library. The downloaded file is saved to the local filesystem.
   Extract Zip File: Unzip the downloaded file into the designated extraction directory. If the zip file contains nested zip files, they are also extracted. After extraction, the original zip files are deleted, leaving only the extracted data files.
 
+
 # Data Preprocessing Pipeline
 The `DataPreprocessingTrainingPipeline` script orchestrates the data preprocessing phase, ensuring the dataset is refined and structured for subsequent model training.
 
 Data Preprocessing Pipeline Overview
 The data ingestion pipeline involves two main components:
-stage_02_data_preprocessing_pipeline.py
-data_preprocessing.py
+- `**stage_02_data_preprocessing_pipeline.py**`
+- `**data_preprocessing.py**`
 
 Steps:
 - Read and Filter Data: The script reads the CSV file in chunks, filters rows based on the specified start date, and concatenates the filtered chunks into a single DataFrame.
@@ -236,13 +221,14 @@ Steps:
 - Merge DataFrames: DataFrames containing statistical indicators and monthly/yearly data are merged, creating a comprehensive dataset. The merged DataFrame is saved to a **final** CSV file.
 - Extract Unique Regions: A dictionary mapping region IDs to region names is created and saved using pickling.
 
+
 # Model Training Pipeline
 The `DataModellingPipeline` script serves as the entry point for the model training pipeline. Its primary responsibilities include data preparation, model building, and training. The README provides insights into each stage of the pipeline.
 
 Data Model Training Pipeline Overview
 The data ingestion pipeline involves two main components:
-stage_02_model_training_pipeline.py
-model_training.py
+- `**stage_02_model_training_pipeline.py**`
+- `**model_training.py**`
 
 Steps:
 - Data Preparation: Read and preprocess the final dataset, preparing features (X), target (y), and label mapping.
@@ -253,26 +239,75 @@ Steps:
 # Model Evaluation Pipeline
 The `ModelEvaluatePipeline` class orchestrates the evaluation of the trained machine learning model. It achieves this by executing a series of steps:
 
-- **Model Loading**: Retrieves the saved Keras model from the filesystem.
-- **Data Preparation**: Loads the scaled test dataset (`X_test_scaled`) and the true labels (`y_test`).
-- **Model Evaluation**: Utilizes the loaded model to predict the test data and computes performance metrics such as Mean Squared Error (MSE), Root Mean Squared Error (RMSE), and R-squared (R2).
+- `**Model Loading**`: Retrieves the saved Keras model from the filesystem.
+- `**Data Preparation**`: Loads the scaled test dataset (`X_test_scaled`) and the true labels (`y_test`).
+- `**Model Evaluation**`: Utilizes the loaded model to predict the test data and computes performance metrics such as Mean Squared Error (MSE), Root Mean Squared Error (RMSE), and R-squared (R2).
 
 ### Evaluation Metrics
 
 The performance of the model is quantified using the following metrics:
 
-- **Step-01: Extract the data**: Involves extracting the data in ZIP format from Nasdaq API with API key provided by the platform
-- **Step-02: Load the data** :  Loading the extracted ZIP file to .csv format. Later read the .csv file into the dataframe in chunks.
-- **Step-03: Trim the data** : Cutting the data and considering only from the year 2012, since computational power and storage for all 150M rows is very high.
-- **Step-04: Changing date-time datatype** : Here we convert the date-time datatype to numeric to feed to the model
-- **Step-05: Getting Interested Stats** : Out of all the Inventory and sales features, only a few are relevant to most of the regions, so we consider those 6 features and pivot the table with region_id
-- **Step-06: Merging the data with ZHVI features:** Now after we pivot we merge the ZHVI features to the pivoted stat features table from the above step. This step gives the final data that we use for our modeling purposes in the future.
+- `**Step-01: Extract the data**`: Involves extracting the data in ZIP format from Nasdaq API with API key provided by the platform
+- `**Step-02: Load the data**`:  Loading the extracted ZIP file to .csv format. Later read the .csv file into the dataframe in chunks.
+- `**Step-03: Trim the data**` : Cutting the data and considering only from the year 2012, since computational power and storage for all 150M rows is very high.
+- `**Step-04: Changing date-time datatype**` : Here we convert the date-time datatype to numeric to feed to the model
+- `**Step-05: Getting Interested Stats**`: Out of all the Inventory and sales features, only a few are relevant to most of the regions, so we consider those 6 features and pivot the table with region_id
+- `**Step-06: Merging the data with ZHVI features**`: Now after we pivot we merge the ZHVI features to the pivoted stat features table from the above step. This step gives the final data that we use for our modeling purposes in the future.
 
-## Data Modelling
 
-- **Step-01: Read the stored DataFrame from artifacts and prepare the data
-- **Step-02: perform test-train split and scale the DataFrame to return the X_train, X_test, y_train, y_test and scaler files and save them as pickle files.
-- **Step-03: build model using x_train_scaled.shape[1] as input to build the model.
-- **Step-04: train the model by passing the X_train and y_train as arguments with learning rates and epochs passed from the ModelTrainingConfig class from the file configentity.
-- **Step-05: Save the models directory as model.keras
-- 
+# Model Report
+
+The use of TensorBoard in a machine learning pipeline, specifically for model training and hyperparameter tuning. 
+
+## Model Training
+Scalars like loss are graphically presented over time, providing a visual assessment of training efficiency.
+Histograms offer insights into weight and bias distributions, aiding in comprehending parameter updates and detecting issues like vanishing or exploding gradients.
+
+![Epoch Loss](templates/epoch_loss.png)
+
+- The graph illustrates a decreasing trend in epoch loss, indicating continuous learning and improvement.
+- Initial high loss rapidly drops to around 5e+10 in the early epochs, followed by a more gradual decline.
+
+## Hyper-Parameter Tuning
+TensorBoard effectively communicates the impact of varying hyperparameters, such as neurons and dropout rates.
+
+The graph illustrates the loss vs epochs of a neural network model across various hyperparameters. 
+![Epoch Loss - Hyperparameters](templates/epoch_loss_hyperparameter.png)
+
+![Epoch Loss - learning rate, Neuron units](templates/parallel_coordinates_neurons.png)
+- The learning rate decreases more quickly in the beginning of training and then more slowly towards the end.
+- The number of units learned increases more quickly in the beginning of training and then more slowly towards the end.
+
+
+## Docker
+
+- Defines a Docker Compose configuration for a multi-container application.
+- Sets up Apache Airflow with the CeleryExecutor, Redis, and PostgreSQL services.
+- Configures environment variables, mounting volumes, and installing dependencies for each service.
+- Enables local development and testing of Airflow workflows with Docker containers.
+
+# Docker Configuration
+
+Set up Docker environment: docker-compose.yaml
+
+```commandline
+echo -e "AIRFLOW_UID=$(id -u)" > .env
+echo "AIRFLOW_HOME_DIR=$(pwd)" >> .env
+```
+
+Initialize and start Airflow services using Docker Compose:
+
+```commandline
+docker compose up airflow-init
+docker compose up -d
+```
+
+## Apache Airflow
+The Apache Airflow DAG facilitates the automation and scheduling of a Zillow Data Pipeline, enabling a systematic and organized execution of data processing stages. Each task represents a key step in the pipeline, contributing to the overall workflow of data ingestion, preprocessing, modeling, and evaluation.
+
+![Airflow Pipeline Graph](templates/airflow.png)
+
+- Objective: Define an Apache Airflow DAG for a Zillow Data Pipeline.
+- Stages: Four pipeline stages (Data Ingestion, Data Preprocessing, Data Modeling, Model Evaluation).
+- Tasks: PythonOperators execute dynamic pipeline stages, logging start and completion.
+- Execution Flow: Tasks are linked sequentially, ensuring data flows through defined stages.

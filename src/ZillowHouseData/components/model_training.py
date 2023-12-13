@@ -114,7 +114,7 @@ class DataModeling:
             tuner = RandomSearch(
                 lambda hp: self.build_model_tuned(X_train, hp),
                 objective='val_loss',
-                max_trials=2,  # You can adjust the number of trials
+                max_trials=10,  # You can adjust the number of trials
                 directory='artifacts/tuner_logs',
                 project_name='neural_network_tuning')
         

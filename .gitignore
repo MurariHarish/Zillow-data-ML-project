@@ -51,3 +51,4 @@ airflow-webserver.pid
 airflow.cfg
 airflow-worker.pid
 webserver_config.py
+artifacts/*
