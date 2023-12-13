@@ -397,9 +397,6 @@ A breakdown of the costs associated with the Continuous Integration and Deployme
 
 **Total Estimated Monthly Cost: $104.40**
 
-**Note**: These costs are rough estimates. The actual costs may vary based on specific usage patterns, additional services used, and pricing changes. Users are encouraged to use the AWS Pricing Calculator for more detailed and current cost estimates.
-
-
 # Model Efficiency Report
 
 # Handling Data Drift and Data Decay
