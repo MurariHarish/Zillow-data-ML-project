@@ -5,7 +5,7 @@ logs/
 # Except the .gitignore file
 !logs/.gitignore
 
-artifacts/*
+artifacts/data_ingestion/*
 
 ml_zillow/*
 
