@@ -299,7 +299,7 @@ The second workflow is centered around continuous integration and deployment. Th
 
 ![CICD](templates/cicd.png)
 
-## Continuous Integration
+### Continuous Integration
 
 The workflow begins with the *Continuous Integration* job, which involves:
 
@@ -327,8 +327,6 @@ The final phase of the workflow is the *Continuous Deployment* job, which operat
 Following is comprehensive walkthrough for how I deployed the application using AWS services with the integration of GitHub Actions. It covers the entire process from setting up necessary AWS resources to configuring GitHub Actions for seamless CI/CD.
 
 ![CICD flow](templates/CICD-flow.png)
-
-## Getting Started
 
 ### 1. AWS Console Access
 Ensure to have access to the AWS console. This is essential for creating and managing the necessary AWS resources.
@@ -381,7 +379,26 @@ DVC brings agility, traceability, and reproducibility to data science projects. 
 
 # Model Monitoring
 
-# Cost Analysis
+# Cost Analysis Report
+A breakdown of the costs associated with the Continuous Integration and Deployment pipeline, hosted on AWS and utilizing GitHub Actions.
+
+## Initial Cost Analysis
+- **Amazon EC2 Instance (t2.large, 32 GB, Ubuntu OS)**
+  - Monthly cost: Approximately $73.00
+
+- **Amazon ECR Storage (3.5 GB Docker Image)**
+  - Monthly cost: Approximately $0.35
+
+- **Amazon S3 Bucket**
+  - Monthly Cost: Approximately $0.20
+
+- **AWS Quicksight**
+  - Monthly Cost: Approximately $30.85
+
+**Total Estimated Monthly Cost: $104.40**
+
+**Note**: These costs are rough estimates. The actual costs may vary based on specific usage patterns, additional services used, and pricing changes. Users are encouraged to use the AWS Pricing Calculator for more detailed and current cost estimates.
+
 
 # Model Efficiency Report
 
