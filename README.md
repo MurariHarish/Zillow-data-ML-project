@@ -251,20 +251,6 @@ TensorBoard effectively communicates the impact of varying hyperparameters, such
 
 The graph illustrates the loss vs epochs of a neural network model across various hyperparameters. 
 ![Epoch Loss - Hyperparameters](templates/epoch_loss_hyperparameter.png)
-
-## TensorBoard
-The use of TensorBoard in a machine learning pipeline, specifically for model training and hyperparameter tuning. 
-Scalars like loss are graphically presented over time, providing a visual assessment of training efficiency.
-Histograms offer insights into weight and bias distributions, aiding in comprehending parameter updates and detecting issues like vanishing or exploding gradients.
-
-![Epoch Loss](templates/epoch_loss.png)
-
-- The graph illustrates a decreasing trend in epoch loss, indicating continuous learning and improvement.
-- Initial high loss rapidly drops to around 5e+10 in the early epochs, followed by a more gradual decline.
-
-- ![Epoch Loss - learning rate, Neuron units](templates/parallel_coordinates_neurons.png)
-- The learning rate decreases more quickly in the beginning of training and then more slowly towards the end.
-- The number of units learned increases more quickly in the beginning of training and then more slowly towards the end.
   
 # Model Evaluation Pipeline
 
@@ -298,7 +284,7 @@ Histograms offer insights into weight and bias distributions, aiding in comprehe
 - The learning rate decreases more quickly in the beginning of training and then more slowly towards the end.
 - The number of units learned increases more quickly in the beginning of training and then more slowly towards the end.
 
-- ## MLflow Integration
+## MLflow Integration
 
 MLflow is an open-source platform for the complete machine learning lifecycle. Within our pipeline, MLflow is used to log parameters, metrics, and models, ensuring reproducibility and tracking of experiments.
 
