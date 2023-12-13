@@ -16,11 +16,6 @@ class ModelEvaluatePipeline:
         logger.info(f">>>>>> stage {STAGE_NAME} initiated <<<<<<\n\nx==========x")
         loaded_model = load_keras_model("models", "model.keras")
         logger.info(">>>>>> Loaded saved model successfully<<<<<<\n\nx==========x")
-        
-        logger.info(">>>>>> model details for me to see inside evaluate_model : <<<<<<\n\nx==========x")
-        model_details = loaded_model.summary()
-        logger.info(">>>>>> Model Summary <<<<<<\n\nx==========x")
-        logger.info(model_details)
 
         X_test_scaled = load_pickle_object("models", "X_test_scaled.pkl")
         y_test = load_pickle_object("models", "y_test.pkl")
@@ -36,8 +31,8 @@ class ModelEvaluatePipeline:
         config = ConfigurationManager()
         model_evaluation_config = config.get_model_evaluation_config()
         model_evaluate = ModelEvaluate(config=model_evaluation_config)
-        mse = model_evaluate.evaluate_model(loaded_model, X_test_scaled, y_test)
-        logger.info(f">>>>>> Model validation completed with MSE {mse} <<<<<<\n\nx==========x")
+        mse, rmse, r2 = model_evaluate.evaluate_model(loaded_model, X_test_scaled, y_test)
+        logger.info(">>>>>> Model validation completed <<<<<<\n\nx==========x")
         
 if __name__ == '__main__':
     try:

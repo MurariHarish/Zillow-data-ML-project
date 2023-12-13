@@ -26,7 +26,7 @@ To build, test, and deploy this project, you will need:
 
 ### Installing:
 **1. Cloning the repository**
-````commandline
+````command line
 https://github.com/MurariHarish/Zillow-data-ML-project
 ````
 **2. Create a conda environment after opening the repository**
@@ -68,20 +68,28 @@ market's dynamics.
 The data is basically of 3 tables
 Zillow_Data:
 
-Features comprise of 3 various sets of indicators.
+Features comprise 3 various sets of indicators.
 
-- **10 ZHVI (Zillow House Value Index)** features
+- **10 ZHVI (Zillow House Value Index)** Features
 
-- **44 Inventory and sales** features
+- **44 Inventory and sales** Features
 
-- **2 Rentals** features
+- **2 Rentals** Features
 
 ## Data Pipeline:
 
 - **Step-01: Extract the data**: Involves extracting the data in ZIP format from Nasdaq API with API key provided by the platform
-- **Step-02: Load the data** :  Loading the extracted ZIP file to .csv format. Later read the .csv file into dataframe by chunks.
-- **Step-03: Trim the data** : Cutting the data and considering only from year 2012, since computational power and storage for all 150M rows is very high.
+- **Step-02: Load the data** :  Loading the extracted ZIP file to .csv format. Later read the .csv file into the dataframe in chunks.
+- **Step-03: Trim the data** : Cutting the data and considering only from the year 2012, since computational power and storage for all 150M rows is very high.
 - **Step-04: Changing date-time datatype** : Here we convert the date-time datatype to numeric to feed to the model
-- **Step-05: Getting Interested Stats** : Out of all the Inventory and sales features, only few are relevant to most of the regions, so we consider those 6 features and pivot the table with region_id
-- **Step-06: Merging the data with ZHVI features:** Now after we pivot we merge the ZHVI features to the pivoted stat features table from the above step. This step gives our final data that we use for our modelling purposes in future.
+- **Step-05: Getting Interested Stats** : Out of all the Inventory and sales features, only a few are relevant to most of the regions, so we consider those 6 features and pivot the table with region_id
+- **Step-06: Merging the data with ZHVI features:** Now after we pivot we merge the ZHVI features to the pivoted stat features table from the above step. This step gives the final data that we use for our modeling purposes in the future.
 
+## Data Modelling
+
+- **Step-01: Read the stored DataFrame from artifacts and prepare the data
+- **Step-02: perform test-train split and scale the DataFrame to return the X_train, X_test, y_train, y_test and scaler files and save them as pickle files.
+- **Step-03: build model using x_train_scaled.shape[1] as input to build the model.
+- **Step-04: train the model by passing the X_train and y_train as arguments with learning rates and epochs passed from the ModelTrainingConfig class from the file configentity.
+- **Step-05: Save the models directory as model.keras
+- 

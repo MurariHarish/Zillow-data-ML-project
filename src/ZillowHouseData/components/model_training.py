@@ -80,8 +80,6 @@ class DataModeling:
         except Exception as e:
             raise CustomException(e, sys)
 
-#################################################################################################################
-
     def build_model_tuned(self, X_train, hp):
         try:
             model = Sequential()
@@ -134,4 +132,3 @@ class DataModeling:
 
         except Exception as e:
             raise CustomException(e, sys)
-
