@@ -374,10 +374,13 @@ Configure the following secrets in GitHub repository for secure access:
 - `AWS_ECR_LOGIN_URI`: The login URI for AWS ECR.
 - `ECR_REPOSITORY_NAME`: The name of the ECR repository.
 
-# DVC (Data Version Control)
-DVC brings agility, traceability, and reproducibility to data science projects. It enables you to track changes in data, code, and machine learning models, and it integrates seamlessly into existing Git workflows. DVC is used in our project to handle large data files, data sets, machine learning models, and metrics associated with the models.
-
 # Model Monitoring
+
+# Model Efficiency Report
+
+# Handling Data Drift and Data Decay
+
+# Sample Predictions
 
 # Cost Analysis Report
 A breakdown of the costs associated with the Continuous Integration and Deployment pipeline, hosted on AWS and utilizing GitHub Actions.
@@ -397,11 +400,9 @@ A breakdown of the costs associated with the Continuous Integration and Deployme
 
 **Total Estimated Monthly Cost: $104.40**
 
-# Model Efficiency Report
+# DVC (Data Version Control)
+DVC brings agility, traceability, and reproducibility to data science projects. It enables you to track changes in data, code, and machine learning models, and it integrates seamlessly into existing Git workflows. DVC is used in our project to handle large data files, data sets, machine learning models, and metrics associated with the models.
 
-# Handling Data Drift and Data Decay
-
-# Sample Predictions
 
 
 
