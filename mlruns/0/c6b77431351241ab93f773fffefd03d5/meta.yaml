@@ -1,8 +1,9 @@
 artifact_uri: mlflow-artifacts:/0/c6b77431351241ab93f773fffefd03d5/artifacts
+deleted_time: 1701963139692
 end_time: 1701902596223
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: c6b77431351241ab93f773fffefd03d5
 run_name: angry-ram-787
 run_uuid: c6b77431351241ab93f773fffefd03d5

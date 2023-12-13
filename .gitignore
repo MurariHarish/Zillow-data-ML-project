@@ -5,12 +5,12 @@ logs/
 # Except the .gitignore file
 !logs/.gitignore
 
-artifacts/*
+artifacts/data_ingestion/*
 
-mlops_zillow/*
+ml_zillow/*
 
 #Ignore dvc.lock file
-#dvc.lock
+dvc.lock
 final.csv
 
 /mlflow/mlruns/
@@ -42,3 +42,12 @@ __pycache__/
 
 mlruns/
 
+/mlflow/tuner_logs/
+/dags/src/mlruns/
+/dags/src/tuner_logs/
+
+
+airflow-webserver.pid
+airflow.cfg
+airflow-worker.pid
+webserver_config.py

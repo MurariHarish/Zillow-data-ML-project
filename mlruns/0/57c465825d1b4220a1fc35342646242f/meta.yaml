@@ -1,8 +1,9 @@
 artifact_uri: mlflow-artifacts:/0/57c465825d1b4220a1fc35342646242f/artifacts
+deleted_time: 1701963139696
 end_time: 1701900322276
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: 57c465825d1b4220a1fc35342646242f
 run_name: capable-stag-40
 run_uuid: 57c465825d1b4220a1fc35342646242f

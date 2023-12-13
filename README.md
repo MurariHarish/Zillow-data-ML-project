@@ -12,6 +12,7 @@ Zillow, a leader in real estate and rental marketplaces, is dedicated to empower
 
 ### Coverage
 
+
 This data feed includes 10 indicators across 3 categories:
 - Home Values
 - Rentals
@@ -39,6 +40,13 @@ This product is accessible via the Nasdaq Data Link's Tables API.
 ### Python Access:
 
 To access this data using Python, you can use the Quandl library. First, install the library using pip if you haven't already:
+
+### Installing:
+**1. Cloning the repository**
+````command line
+https://github.com/MurariHarish/Zillow-data-ML-project
+````
+**2. Create a conda environment after opening the repository**
 
 ```bash
 pip install quandl
@@ -437,16 +445,3 @@ A breakdown of the costs associated with the Continuous Integration and Deployme
 
 # DVC (Data Version Control)
 DVC brings agility, traceability, and reproducibility to data science projects. It enables you to track changes in data, code, and machine learning models, and it integrates seamlessly into existing Git workflows. DVC is used in our project to handle large data files, data sets, machine learning models, and metrics associated with the models.
-
-
-
-
-
-## Docker
-Docker is a containerization platform that packages an application and its dependencies in a virtual container that can run on any Linux server. This provides flexibility and portability on where the application can run, whether on-premises, in public cloud, or in a private cloud. Docker streamlines the development lifecycle by allowing developers to work in standardized environments using local containers which provide your applications and services.
-
-## Apache Airflow
-Apache Airflow is an open-source tool that helps to schedule and orchestrate complex data pipelines. By defining workflows as code, they can be more dynamic, maintainable, and transparent. We use Airflow to ensure that the right tasks are executed at the right time, handling dependencies across our data pipeline.
-
-
-

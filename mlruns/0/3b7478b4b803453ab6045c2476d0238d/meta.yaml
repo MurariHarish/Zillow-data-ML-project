@@ -1,8 +1,9 @@
 artifact_uri: mlflow-artifacts:/0/3b7478b4b803453ab6045c2476d0238d/artifacts
+deleted_time: 1701963139701
 end_time: 1701896779905
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: 3b7478b4b803453ab6045c2476d0238d
 run_name: polite-perch-307
 run_uuid: 3b7478b4b803453ab6045c2476d0238d

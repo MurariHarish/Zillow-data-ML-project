@@ -58,12 +58,17 @@ def load_keras_model(load_folder, file_name):
         # Load the keras model file
         loaded_model = keras.models.load_model(load_path)
 
+        logger.info(">>>>>> model details for me to see inside common.py : <<<<<<\n\nx==========x")
+        model_details = loaded_model.summary()
+        logger.info(">>>>>> Model Summary <<<<<<\n\nx==========x")
+        logger.info(model_details)
+
         return loaded_model
 
     except Exception as e:
         print(f"Error loading the model: {str(e)}")
 
-
+@ensure_annotations
 def load_pickle_object(load_folder, file_name):
     try:
         # Create the full load path, including the "artifacts/" folder
@@ -125,7 +130,8 @@ def prepare_data(df):
         # Encoding indicator_id
         label_encoder = LabelEncoder()
         df['encoded_indicator_id'] = label_encoder.fit_transform(df['indicator_id'])
-        df.drop(['Unnamed: 0','indicator_id'], axis=1, inplace= True)
+        #df.drop(['Unnamed: 0','indicator_id'], axis=1, inplace= True)
+        df.drop(['indicator_id'], axis=1, inplace= True)
 
         # Select relevant columns
         columns_to_use = ['encoded_indicator_id', 'region_id', 'year', 'month', 'CRAM', 'IRAM', 'LRAM', 'MRAM', 'NRAM', 'SRAM']
@@ -134,10 +140,11 @@ def prepare_data(df):
         X = df[columns_to_use]
         y = df['value']
 
-        return X, y
+        return X, y, label_encoder
 
     except Exception as e:
         raise CustomException(e, sys)     
+
 
 def train_and_test_split(X, y):
     # Split the data into training and testing sets
@@ -155,3 +162,59 @@ def train_and_test_split(X, y):
     X_test_scaled = scaler.transform(X_test)
 
     return X_train_scaled, X_test_scaled, y_train, y_test, scaler
+
+def prepare_data(df):
+    try:
+        
+        # Encoding indicator_id
+        label_encoder = LabelEncoder()
+        df['encoded_indicator_id'] = label_encoder.fit_transform(df['indicator_id'])
+        # Create the mapping dictionary
+        label_to_category_mapping = dict(zip(df['encoded_indicator_id'], df['indicator_id']))
+        #df.drop(['Unnamed: 0','indicator_id'], axis=1, inplace= True)
+        if 'Unnamed: 0' in df.columns:
+            df.drop(['Unnamed: 0', 'indicator_id'], axis=1, inplace=True)
+        else:
+            df.drop(['indicator_id'], axis=1, inplace=True)
+            
+        # Select relevant columns
+        columns_to_use = ['encoded_indicator_id', 'region_id', 'year', 'month', 'CRAM', 'IRAM', 'LRAM', 'MRAM', 'NRAM', 'SRAM']
+
+        # Define features and target variable
+        X = df[columns_to_use]
+        y = df['value']
+
+        return X, y, label_to_category_mapping
+
+    except Exception as e:
+        raise CustomException(e, sys)     
+
+def extract_unique_regions(df,csv_path):
+    """
+    Reads a CSV file, merges it with a given DataFrame on 'region_id',
+    extracts and sorts unique 'region_id' and 'region', and returns a dictionary for region_id to region lookup.
+
+    :param df: DataFrame to merge with the CSV data.
+    :return: Dictionary for region_id to region lookup.
+    """
+    try:
+        # csv_path = 'artifacts/data_ingestion/ZILLOW_REGIONS_1a51d107db038a83ac171d604cb48d5b.csv'
+
+        # Read CSV file
+        df_regions = pd.read_csv(csv_path)
+
+        # Merge the provided DataFrame with the CSV data
+        df_region_merge = pd.merge(df, df_regions, on='region_id', how='inner')
+
+        # Extract unique 'region_id' and 'region', and reset the index
+        unique_regions_df = df_region_merge[['region_id', 'region']].drop_duplicates(subset=['region_id', 'region'])
+
+        # Sort the DataFrame based on 'region'
+        sorted_unique_regions_df = unique_regions_df.sort_values(by='region').reset_index(drop=True)
+
+        # Convert sorted DataFrame to dictionary for region_id to region lookup
+        region_id_to_region = dict(zip(sorted_unique_regions_df['region_id'], sorted_unique_regions_df['region']))
+
+        return region_id_to_region
+    except Exception as e:
+        raise CustomException(e, sys)

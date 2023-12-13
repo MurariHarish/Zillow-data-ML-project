@@ -1,8 +1,9 @@
 artifact_uri: mlflow-artifacts:/0/99e54501420f4d7faae451ff9301dde7/artifacts
+deleted_time: 1701963139697
 end_time: 1701900045228
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: 99e54501420f4d7faae451ff9301dde7
 run_name: aged-deer-466
 run_uuid: 99e54501420f4d7faae451ff9301dde7

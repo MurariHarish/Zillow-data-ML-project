@@ -1,8 +1,9 @@
 artifact_uri: mlflow-artifacts:/0/e1a7164851374994a8db7f7d7c082915/artifacts
+deleted_time: 1701963139688
 end_time: 1701902620232
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: e1a7164851374994a8db7f7d7c082915
 run_name: painted-fowl-523
 run_uuid: e1a7164851374994a8db7f7d7c082915

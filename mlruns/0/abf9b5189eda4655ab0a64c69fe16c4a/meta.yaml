@@ -1,8 +1,9 @@
 artifact_uri: mlflow-artifacts:/0/abf9b5189eda4655ab0a64c69fe16c4a/artifacts
+deleted_time: 1701963139687
 end_time: 1701902621902
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: abf9b5189eda4655ab0a64c69fe16c4a
 run_name: bemused-doe-689
 run_uuid: abf9b5189eda4655ab0a64c69fe16c4a

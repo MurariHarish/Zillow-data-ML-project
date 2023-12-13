@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* body {
+            background-image: url('background.png');
+            background-size:cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        } */
+        .container {
+            width: 80%;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-control {
+            width: 100%;
+            padding: 6px 12px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            
+        }
+        h1 {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-container, .results-container {
+            flex: 1;  /* Each section takes half the width of .flex-container */
+            margin: 10px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Optional: Add some padding or margin for spacing between columns */
+        .form-container {
+            margin-right: 20px;
+        }
+        body {
+            background-color: rgb(241, 220, 192);
+            text-align: center;
+            padding: 0px;
+        }
+    </style>
+</head>
+<body style="background-size: cover; background-repeat: no-repeat; background-attachment: fixed;">
+    <div class="container">
+        <h1>House Price Prediction</h1>
+        <div class="flex-container">
+            <div class="form-container">
+                <form action="/" method="post">
+                    <!-- Form fields here -->
+                    <div class="mb-3">
+                        <label class="form-label">Indicator ID</label>
+                        <select class="form-control" name="encoded_indicator_id" required>
+                            <option selected disabled value="">Choose Indicator ID</option>
+                            {% for value, name in label_to_category_mapping.items() %}
+                                <option value="{{ value }}">{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                
+                    <div class="mb-3">
+                        <label class="form-label">Region ID</label>
+                        <select class="form-control" name="region_id" required>
+                            <option selected disabled value="">Select Region ID</option>
+                            {% for value, name in region_label_mapping.items() %}
+                                <option value="{{ value }}">{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                
+                    <div class="mb-3">
+                        <label class="form-label">Year</label>
+                        <select class="form-control" name="year" required>
+                            <option selected disabled value="">Select Year</option>
+                            {% for year in range(2000, 2101) %}
+                            <option value="{{ year }}">{{ year }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                
+                    <div class="mb-3">
+                        <label class="form-label">Month</label>
+                        <select class="form-control" name="month" required>
+                            <option selected disabled value="">Select Month</option>
+                            {% for month in range(1, 13) %}
+                            <option value="{{ month }}">{{ month }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                
+                    <div class="mb-3">
+                        <label class="form-label">Monthly Home Price Reduction Rate, (CRAM)</label>
+                        <input class="form-control" type="number" name="CRAM" step="0.0001" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Instantaneous Real Estate Market Inventory, (IRAM)</label>
+                        <input class="form-control" type="number" name="IRAM" step="1" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Median List Price, (LRAM)</label>
+                        <input class="form-control" type="number" name="LRAM" step="1" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Mean Days to Pending, (MRAM)</label>
+                        <input class="form-control" type="number" name="MRAM" step="1" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Median Day to Pending, (NRAM)</label>
+                        <input class="form-control" type="number" name="NRAM" step="1" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Median Sale Price, (SRAM)</label>
+                        <input class="form-control" type="number" name="SRAM" step="1" />
+                    </div>
+                    <div class="mb-3">
+                        <input class="btn btn-primary" type="submit" value="Predict the Price" />
+                    </div>
+                </form>
+            </div>
+
+            <div class="results-container">
+                {% if user_input %}
+                <div>
+                    <h2>Input Parameters</h2>
+                    {% for key, value in user_input.items() %}
+                    <div><strong>{{ key }}:</strong> {{ value }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            
+                {% if result %}
+                <h1>Predicted Price: {{ result }}</h1>
+                {% endif %}
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

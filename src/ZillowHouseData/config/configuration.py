@@ -42,6 +42,7 @@ class ConfigurationManager:
             stats_path=Path(config.stats_path),
             final_csv_path=Path(config.final_csv_path),
             file_name=config.file_name,
+            region_file_name = config.region_file_name,
             start_date=config.start_date,
             interested_columns=config.interested_columns,
             interested_indicators_stats=config.interested_indicators_stats,
@@ -55,27 +56,27 @@ class ConfigurationManager:
 
         config = self.config.model_training
 
-        # model_training_config = ModelTrainingConfig(
-        #     learning_rate=self.params.LEARNING_RATE,
-        #     epochs=self.params.EPOCHS,
-        #     batch_size=self.params.BATCH_SIZE,
-        #     validation_split=self.params.VALIDATION_SPLIT,
-        #     verbose=self.params.VERBOSE,
-        #     final_csv_path=Path(config.final_csv_path)
-        # )
-
         model_training_config = ModelTrainingConfig(
-            max_depth=self.params.MAX_DEPTH,
             learning_rate=self.params.LEARNING_RATE,
-            reg_alpha=self.params.REG_ALPHA,
-            reg_lambda=self.params.REG_LAMBDA,
-            min_child_weight=self.params.MIN_CHILD_WEIGHT,
-            objective=self.params.OBJECTIVE,
-            eval_metric=self.params.EVAL_METRIC,
-            n_estimators=self.params.N_ESTIMATORS,
-            random_state=self.params.RANDOM_STATE,
+            epochs=self.params.EPOCHS,
+            batch_size=self.params.BATCH_SIZE,
+            validation_split=self.params.VALIDATION_SPLIT,
+            verbose=self.params.VERBOSE,
             final_csv_path=Path(config.final_csv_path)
         )
+
+        # model_training_config = ModelTrainingConfig(
+        #     max_depth=self.params.MAX_DEPTH,
+        #     learning_rate=self.params.LEARNING_RATE,
+        #     reg_alpha=self.params.REG_ALPHA,
+        #     reg_lambda=self.params.REG_LAMBDA,
+        #     min_child_weight=self.params.MIN_CHILD_WEIGHT,
+        #     objective=self.params.OBJECTIVE,
+        #     eval_metric=self.params.EVAL_METRIC,
+        #     n_estimators=self.params.N_ESTIMATORS,
+        #     random_state=self.params.RANDOM_STATE,
+        #     final_csv_path=Path(config.final_csv_path)
+        # )
         return model_training_config
 
 

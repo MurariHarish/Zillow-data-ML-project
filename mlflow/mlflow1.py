@@ -1,6 +1,6 @@
 # import mlflow
 from mlflow.models import infer_signature
-from sklearn.metrics import roc_auc_score
+
 from sklearn.model_selection import train_test_split
 from sklearn.datasets import load_diabetes, load_breast_cancer
 from hyperopt import fmin, tpe, hp, STATUS_OK
@@ -14,23 +14,37 @@ import time
 from sklearn.metrics import mean_squared_error
 import pandas as pd
 import os
+from sklearn.preprocessing import StandardScaler
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, BatchNormalization,Dropout
+from tensorflow.keras.optimizers import Adam
+from kerastuner.tuners import RandomSearch
+from tensorflow.keras.callbacks import TensorBoard
+import datetime
 
-search_space = {
-    'max_depth' : scope.int(hp.quniform('max_depth', 4, 100, 1)),
-    'learning_rate' : hp.loguniform('learning_rate', -3, 0),
-    'reg_alpha' : hp.loguniform('reg_alpha', -5, -1),
-    'reg_lambda' : hp.loguniform('reg_lambda', -6, -1),
-    'min_child_length' : hp.loguniform('min_chilg_length', -1, 3),
-    'objective': 'reg:squarederror',
-    'eval_metric': 'rmse',
-    'seed' : 123,
-}
+def build_model(X_train, hp):
+    model = Sequential()
+    model.add(Dense(units=hp.Int('units_1', min_value=32, max_value=256, step=32),
+                    activation='relu', input_shape=(X_train.shape[1],)))
+    model.add(BatchNormalization())
+    model.add(Dropout(hp.Float('dropout_1', min_value=0.2, max_value=0.5, step=0.1)))
+    model.add(Dense(units=hp.Int('units_2', min_value=32, max_value=128, step=32),
+                    activation='relu', kernel_regularizer='l2'))
+    model.add(BatchNormalization())
+    model.add(Dropout(hp.Float('dropout_2', min_value=0.2, max_value=0.5, step=0.1)))
+    model.add(Dense(units=hp.Int('units_3', min_value=16, max_value=64, step=16),
+                    activation='relu', kernel_regularizer='l2'))
+    model.add(BatchNormalization())
+    model.add(Dropout(hp.Float('dropout_3', min_value=0.2, max_value=0.5, step=0.1)))
+    model.add(Dense(1, kernel_regularizer='l2'))
 
-def model_training(params):
-    mlflow.xgboost.autolog()
-    # Load the diabetes dataset.
-    # db = load_breast_cancer()
-    # X_train, X_val, y_train, y_val = train_test_split(db.data, db.target)
+    # Compile the model
+    model.compile(
+        optimizer=Adam(learning_rate=hp.Float('learning_rate', min_value=1e-4, max_value=1e-2, sampling='log')),
+        loss='mse')
+
+    return model
+def train_model(**kwargs):
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), '../dags/data/final.csv'))
     # Select relevant columns
     columns_to_use = ['indicator_id', 'region_id', 'year', 'month', 'CRAM', 'IRAM', 'LRAM', 'MRAM', 'NRAM', 'SRAM']
@@ -42,41 +56,35 @@ def model_training(params):
     # Split the data into training and testing sets
     X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    with mlflow.start_run(nested=True):
-        train = xgb.DMatrix(data= X_train, label = y_train)
-        validation = xgb.DMatrix(data = X_val, label = y_val)
+    log_dir = "../tensorflow/logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    tensorboard_callback = TensorBoard(log_dir=log_dir, histogram_freq=1, profile_batch='5,10')
 
-        booster = xgb.train(params = params, dtrain = train, num_boost_round = 1000, \
-                            evals = [(validation, 'validation')], early_stopping_rounds = 50)
+    with mlflow.start_run(run_name='NN_models'):
+        tuner = RandomSearch(
+                lambda hp: build_model(X_train, hp),
+                objective='val_loss',
+                max_trials=2,  # You can adjust the number of trials
+                directory='tuner_logs',
+                project_name='neural_network_tuning')
+                # )
 
-        validation_predictions = booster.predict(validation)
-        # auc_score = roc_auc_score(y_val, validation_predictions)
-        # mlflow.log_metric('auc', auc_score)
-        mse = mean_squared_error(y_val, validation_predictions)
-        mlflow.log_metric('mse', mse)
+    tuner.search(X_train, y_train, epochs=5, validation_split=0.2,callbacks=[tensorboard_callback])
 
-        signature = infer_signature(X_train, booster.predict(train))
-        mlflow.xgboost.log_model(booster, 'model', signature = signature)
+    # Get the best hyperparameters
+    best_hps = tuner.get_best_hyperparameters(num_trials=1)[0]
 
-        return {'status' : STATUS_OK, 'loss': mse, 'booster' : booster.attributes()}
+    # Build the model with the best hyperparameters
+    best_model = tuner.hypermodel.build(best_hps)
 
-def train_model(**kwargs):
+    # Make predictions on the test set
+    y_pred = best_model.predict(X_val)
 
+    # Evaluate the model
+    mse = mean_squared_error(y_val, y_pred)
+    mlflow.log_metric('mse', mse)
+    print(f'Mean Squared Error: {mse}')
 
-    conf_spark = SparkConf().set("spark.driver.host", "127.0.0.1")
-    sc = SparkContext(conf=conf_spark)
-
-    spark_trails = SparkTrials(parallelism=6)
-
-    with mlflow.start_run(run_name='xgboost_models'):
-        best_parms = fmin(
-            fn=model_training,
-            space=search_space,
-            algo=tpe.suggest,
-            max_evals=2,
-            trials=spark_trails,
-        )
-
+    mlflow.tensorflow.log_model(best_model, 'model')
 
 def register_model(**kwargs):
 
@@ -129,6 +137,7 @@ def register_model(**kwargs):
             version=new_model_version.version,
             stage='Production'
         )
+
 
 
     # model_name = 'test_model'

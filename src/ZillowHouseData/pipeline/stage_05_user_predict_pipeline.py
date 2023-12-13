@@ -11,7 +11,7 @@ class UserPredictPipeline:
     def __init__(self):
         pass
 
-    def user_predict(self):
+    def user_predict(self, user_input):
         
         logger.info(f">>>>>> stage {STAGE_NAME} initiated <<<<<<\n\nx==========x")
 
@@ -26,13 +26,16 @@ class UserPredictPipeline:
         config = ConfigurationManager()
         user_predict_config = config.get_user_input_predic_config()
         predict_pipeline = Predict(config= user_predict_config)
-        predict_pipeline.predict_user_input(loaded_model, scaler)
+        pred_value = predict_pipeline.predict_user_input(loaded_model, scaler, user_input)
         logger.info(">>>>>> Prediction pipeline completed <<<<<<\n\nx==========x")
-
-    def evaluation_stage(self):
-        try:
-            obj4 = UserPredictPipeline()
-            obj4.user_predict()
-        except Exception as e:
-            logger.exception(e)
-            raise CustomException(e, sys)
+        return pred_value
+        
+if __name__ == '__main__':
+    try:
+        logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
+        obj4 = UserPredictPipeline()
+        obj4.user_predict()
+        logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+    except Exception as e:
+        logger.exception(e)
+        raise CustomException(e,sys)

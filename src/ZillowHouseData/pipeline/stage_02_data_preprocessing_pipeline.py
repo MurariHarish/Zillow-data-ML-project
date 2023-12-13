@@ -1,9 +1,10 @@
+import sys
 from src.ZillowHouseData.components.data_preprocessing import DataPreprocessing
 from src.ZillowHouseData.logger import logger
 from src.ZillowHouseData.exception import CustomException
 from src.ZillowHouseData.config.configuration import ConfigurationManager
-from src.ZillowHouseData.pipeline.stage_01_data_ingestion_pipeline import ingestion_stage
-import sys
+from src.ZillowHouseData.utils.common import save_object_to_pickle
+
 
 STAGE_NAME = "Data Preprocessing stage"
 
@@ -21,24 +22,30 @@ class DataPreprocessingTrainingPipeline:
             logger.info(">>>>>> Parsing and Filtering data <<<<<<\n\nx==========x")
             load_df = data_preprocessor.read_and_filter_data()
 
-            logger.info(">>>>>> exact year & month <<<<<<\n\nx==========x")
+            logger.info(">>>>>> extract year & month <<<<<<\n\nx==========x")
             filter_df = data_preprocessor.get_year_month(load_df)
-
+            filter_df.to_csv('artifacts/data_ingestion/filter_df.csv')
             logger.info(">>>>>> get stats <<<<<<\n\nx==========x")
             stats_df = data_preprocessor.get_stats(filter_df)
 
             logger.info(">>>>>> merging data <<<<<<\n\nx==========x")
-            final_data = data_preprocessor.get_merge(stats_df, filter_df)
-            
+            merge_data = data_preprocessor.get_merge(stats_df, filter_df)
+
+            logger.info(f">>>>>> Cleaning data <<<<<<\n\nx==========x")
+
+            final_data = data_preprocessor.clean_dataset(merge_data)
+
+            region_id_region_dict = data_preprocessor.extract_unique_regions(final_data)
+            save_object_to_pickle(region_id_region_dict, "models", "region_label")
+
             logger.info(f">>>>>> stage {STAGE_NAME}completed <<<<<<\n\nx==========x")
-
-
-    def preprocessing_stage(self):
-    #ingestion_stage()
-        try:
-            obj1 = DataPreprocessingTrainingPipeline()
-            obj1.data_preprocess()
-        except Exception as e:
-            logger.exception(e)
-            raise CustomException(e,sys)
     
+if __name__ == '__main__':
+    try:
+        logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
+        obj1 = DataPreprocessingTrainingPipeline()
+        obj1.data_preprocess()
+        logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+    except Exception as e:
+        logger.exception(e)
+        raise CustomException(e,sys)

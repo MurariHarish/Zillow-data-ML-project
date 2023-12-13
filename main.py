@@ -27,15 +27,14 @@ try:
     logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 except Exception as e:
     logger.exception(e)
-    raise CustomException(e,sys) 
+    raise CustomException(e,sys)  
 
-
-STAGE_NAME = "Data Preprocessing "
+STAGE_NAME = "Data Preprocessing"
 
 try:
     logger.info(f">>>>>> Stage {STAGE_NAME} started <<<<<<")
     obj = DataPreprocessingTrainingPipeline()
-    obj.preprocessing_stage()
+    obj.data_preprocess()
     logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 except Exception as e:
     logger.exception(e)
@@ -47,7 +46,7 @@ STAGE_NAME = "Data Modelling"
 try:
     logger.info(f">>>>>> Stage {STAGE_NAME} started <<<<<<")
     obj2 = DataModellingPipeline()
-    obj2.modelling_stage()
+    obj2.data_model()
     logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 except Exception as e:
     logger.exception(e)
@@ -75,4 +74,4 @@ except Exception as e:
 #     logger.exception(e)
 #     raise CustomException(e,sys)
 
-# #-----------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------
