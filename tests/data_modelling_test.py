@@ -13,6 +13,9 @@ from sklearn.preprocessing import LabelEncoder
 from pathlib import Path
 from tensorflow.keras.layers import Dense, BatchNormalization, Dropout
 from tensorflow.keras.optimizers import Adam
+from sklearn.preprocessing import StandardScaler
+
+
 ########################################################################################################################
 @pytest.fixture
 def create_temp_csv(tmp_path):
