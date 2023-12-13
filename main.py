@@ -27,8 +27,7 @@ try:
     logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 except Exception as e:
     logger.exception(e)
-    raise CustomException(e,sys) 
-
+    raise CustomException(e,sys)  
 
 STAGE_NAME = "Data Preprocessing"
 
