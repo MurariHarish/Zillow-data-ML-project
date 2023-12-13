@@ -217,14 +217,14 @@ Upon receiving input from the user, the pipeline performs the following steps:
 1. **User Input Processing**: Transforms the raw user input into a format suitable for prediction.
 2. **Prediction**: Uses the model and scaler to predict the output based on the user input.
 
-### Web Application Integration
+## Flask Web Application Integration
 
 The prediction pipeline is integrated into a Flask web application, providing an interactive user interface for input submission and result display. The application handles:
 
 - **Data Point Prediction**: A web form captures user input, which is then parsed, validated, and fed into the prediction pipeline.
 - **Training Invocation**: An endpoint is exposed to trigger model retraining, allowing for continuous improvement of the prediction model.
 
-## Endpoints
+### Endpoints
 
 - `/`: The main endpoint that renders the prediction form and displays the predicted result.
 - `/train`: Endpoint to initiate the model training process.
