@@ -5,8 +5,8 @@ stages:
     deps:
     - path: config/config.yaml
       hash: md5
-      md5: 5ac3d3195bbb8885681cf2c6e375c375
-      size: 1107
+      md5: b8957eee0bfdd24844531e695c9e3112
+      size: 1118
     - path: src/ZillowHouseData/pipeline/stage_01_data_ingestion_pipeline.py
       hash: md5
       md5: 09e287d2bbad73c45830f97ff654f82a
@@ -23,34 +23,34 @@ stages:
     deps:
     - path: artifacts/data_ingestion
       hash: md5
-      md5: 5632896f776c4f62ab5c0e523dafaf03.dir
-      size: 9195601500
-      nfiles: 9
+      md5: c572acb0c89d533a6bdf2226458ddfe2.dir
+      size: 3862292809
+      nfiles: 8
     - path: config/config.yaml
       hash: md5
-      md5: 5ac3d3195bbb8885681cf2c6e375c375
-      size: 1107
+      md5: b8957eee0bfdd24844531e695c9e3112
+      size: 1118
     - path: src/ZillowHouseData/pipeline/stage_02_data_preprocessing_pipeline.py
       hash: md5
-      md5: 9ead99b2935f34b24b36cbd9999ea429
-      size: 2120
+      md5: 7d894315f1a1f3f74aee2e0a21ee1fb5
+      size: 2251
   model_training:
     cmd:
     - python src/ZillowHouseData/pipeline/stage_03_model_training_pipeline.py
     deps:
     - path: artifacts/data_ingestion
       hash: md5
-      md5: 5632896f776c4f62ab5c0e523dafaf03.dir
-      size: 9195601500
-      nfiles: 9
+      md5: c572acb0c89d533a6bdf2226458ddfe2.dir
+      size: 3862292809
+      nfiles: 8
     - path: config/config.yaml
       hash: md5
-      md5: 5ac3d3195bbb8885681cf2c6e375c375
-      size: 1107
+      md5: b8957eee0bfdd24844531e695c9e3112
+      size: 1118
     - path: src/ZillowHouseData/pipeline/stage_03_model_training_pipeline.py
       hash: md5
-      md5: 286a0af866813232de570bc2367775ec
-      size: 2721
+      md5: 32ae074b5a8f9202b847102eb4fa0554
+      size: 3662
     params:
       params.yaml:
         BATCH_SIZE: 32
@@ -61,7 +61,7 @@ stages:
     outs:
     - path: artifacts/models
       hash: md5
-      md5: 49ac726e7874fff134db646723ed4b69.dir
+      md5: 9810f455dd5f0b7d25acf704c9b6ae03.dir
       size: 9684308
       nfiles: 6
   model_evaluation:
@@ -70,19 +70,19 @@ stages:
     deps:
     - path: artifacts/data_ingestion
       hash: md5
-      md5: 5632896f776c4f62ab5c0e523dafaf03.dir
-      size: 9195601500
-      nfiles: 9
+      md5: c572acb0c89d533a6bdf2226458ddfe2.dir
+      size: 3862292809
+      nfiles: 8
     - path: artifacts/models
       hash: md5
-      md5: 49ac726e7874fff134db646723ed4b69.dir
+      md5: 9810f455dd5f0b7d25acf704c9b6ae03.dir
       size: 9684308
       nfiles: 6
     - path: config/config.yaml
       hash: md5
-      md5: 5ac3d3195bbb8885681cf2c6e375c375
-      size: 1107
+      md5: b8957eee0bfdd24844531e695c9e3112
+      size: 1118
     - path: src/ZillowHouseData/pipeline/stage_04_model_evaluate_pipeline.py
       hash: md5
-      md5: 2df4d3553b802c03ffe097bc5506a9ff
-      size: 1676
+      md5: a9631965e8d8f45d0e3003e3ea585833
+      size: 1951
