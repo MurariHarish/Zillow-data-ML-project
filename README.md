@@ -376,6 +376,24 @@ Configure the following secrets in GitHub repository for secure access:
 
 # Model Monitoring
 
+## Overview
+
+Effective model monitoring is essential to ensure the accuracy and performance of our models in production. This involves tracking model performance, detecting data drift, and identifying anomalies.
+
+## Tools and Services Used for Model Monitoring
+
+### AWS QuickSight
+- **Purpose**: AWS QuickSight is used for visualizing and analyzing model performance metrics. It imports data from an S3 bucket and monitors all parameters on which the model was initially trained.
+- **Data Tracking**: QuickSight is configured to automatically fetch new data from the S3 bucket every month. This enables continuous tracking and comparison of new data against the original training dataset.
+- **Anomaly Detection**: Utilizes advanced analytics to detect any anomalies or deviations in the new data, indicating potential issues with model performance or data integrity.
+- **Cost**: Variable, depending on usage, data volume, and the selected subscription plan.
+
+![Quicksight](templates/mm.png)
+
+### AWS CloudWatch
+- **Purpose**: Monitors the operational health and performance of models deployed on EC2 instances.
+
+
 # Model Efficiency Report
 
 # Handling Data Drift and Data Decay
