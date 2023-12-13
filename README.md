@@ -198,6 +198,74 @@ Zillow-data-ML-project/
 ## Data Processing Pipeline Flowchart
 ![Data Processing Pipeline Flowchart](templates/workflow.jpeg)
 
+# Data Ingestion Pipeline
+The `DataIngestionPipeline` script orchestrates the data ingestion process for a machine learning project. This stage is crucial for acquiring the dataset before training the model. The script is structured as follows:
+
+Data Ingestion Pipeline Overview
+The data ingestion pipeline involves two main components:
+- **`stage_01_data_ingestion_pipeline.py`**
+- **`data_ingestion.py`**
+
+Steps:
+- Data Ingestion Pipeline Execution (stage_01_data_ingestion.py):
+    Configuration Initialization: The script initializes the configuration manager and retrieves the data ingestion configuration.
+    Data Ingestion Execution: The script then creates an instance of the DataIngestion class and triggers the download and extraction processes.
+
+- Data Ingestion Configuration (data_ingestion.py):
+  Download File: Fetches the data from the specified URL using the gdown library. The downloaded file is saved to the local filesystem.
+  Extract Zip File: Unzip the downloaded file into the designated extraction directory. If the zip file contains nested zip files, they are also extracted. After extraction, the original zip files are deleted, leaving only the extracted data files.
+
+
+# Data Preprocessing Pipeline
+The `DataPreprocessingTrainingPipeline` script orchestrates the data preprocessing phase, ensuring the dataset is refined and structured for subsequent model training.
+
+Data Preprocessing Pipeline Overview
+The data ingestion pipeline involves two main components:
+- `**stage_02_data_preprocessing_pipeline.py**`
+- `**data_preprocessing.py**`
+
+Steps:
+- Read and Filter Data: The script reads the CSV file in chunks, filters rows based on the specified start date, and concatenates the filtered chunks into a single DataFrame.
+- Extract Year and Month: A new DataFrame column for the year and month is created from the existing 'date' column.
+- Get Statistics: Statistical indicators specified in the configuration are extracted, and a pivot table is created based on region, year, and month. The resulting DataFrame is saved to a CSV file.
+- Merge DataFrames: DataFrames containing statistical indicators and monthly/yearly data are merged, creating a comprehensive dataset. The merged DataFrame is saved to a **final** CSV file.
+- Extract Unique Regions: A dictionary mapping region IDs to region names is created and saved using pickling.
+
+
+# Model Training Pipeline
+The `DataModellingPipeline` script serves as the entry point for the model training pipeline. Its primary responsibilities include data preparation, model building, and training. The README provides insights into each stage of the pipeline.
+
+Data Model Training Pipeline Overview
+The data ingestion pipeline involves two main components:
+- `**stage_02_model_training_pipeline.py**`
+- `**model_training.py**`
+
+Steps:
+- Data Preparation: Read and preprocess the final dataset, preparing features (X), target (y), and label mapping.
+- Train-Test Split and Pickling: Split the dataset into training and testing sets with scaled features. Pickle split data and the feature scaler.
+- Model Training: construct a neural network model and train the model using the training dataset, logging training details. Save the trained model and essential parameters for evaluation.
+- Perform hyperparameter tuning using the Keras Tuner library and Log the best hyperparameters for reference.
+
+## Hyper-Parameter Tuning
+TensorBoard effectively communicates the impact of varying hyperparameters, such as neurons and dropout rates.
+
+The graph illustrates the loss vs epochs of a neural network model across various hyperparameters. 
+![Epoch Loss - Hyperparameters](templates/epoch_loss_hyperparameter.png)
+
+## TensorBoard
+The use of TensorBoard in a machine learning pipeline, specifically for model training and hyperparameter tuning. 
+Scalars like loss are graphically presented over time, providing a visual assessment of training efficiency.
+Histograms offer insights into weight and bias distributions, aiding in comprehending parameter updates and detecting issues like vanishing or exploding gradients.
+
+![Epoch Loss](templates/epoch_loss.png)
+
+- The graph illustrates a decreasing trend in epoch loss, indicating continuous learning and improvement.
+- Initial high loss rapidly drops to around 5e+10 in the early epochs, followed by a more gradual decline.
+
+- ![Epoch Loss - learning rate, Neuron units](templates/parallel_coordinates_neurons.png)
+- The learning rate decreases more quickly in the beginning of training and then more slowly towards the end.
+- The number of units learned increases more quickly in the beginning of training and then more slowly towards the end.
+  
 # Model Evaluation Pipeline
 
 ## Overview
@@ -216,7 +284,21 @@ The performance of the model is quantified using the following metrics:
 - **RMSE (Root Mean Squared Error)**: The square root of MSE which measures the standard deviation of the residuals.
 - **R2 (R-squared)**: Represents the proportion of the variance for the dependent variable that's explained by the independent variables in the model.
 
-## MLflow Integration
+## TensorBoard
+The use of TensorBoard in a machine learning pipeline, specifically for model training and hyperparameter tuning. 
+Scalars like loss are graphically presented over time, providing a visual assessment of training efficiency.
+Histograms offer insights into weight and bias distributions, aiding in comprehending parameter updates and detecting issues like vanishing or exploding gradients.
+
+![Epoch Loss](templates/epoch_loss.png)
+
+- The graph illustrates a decreasing trend in epoch loss, indicating continuous learning and improvement.
+- Initial high loss rapidly drops to around 5e+10 in the early epochs, followed by a more gradual decline.
+
+- ![Epoch Loss - learning rate, Neuron units](templates/parallel_coordinates_neurons.png)
+- The learning rate decreases more quickly in the beginning of training and then more slowly towards the end.
+- The number of units learned increases more quickly in the beginning of training and then more slowly towards the end.
+
+- ## MLflow Integration
 
 MLflow is an open-source platform for the complete machine learning lifecycle. Within our pipeline, MLflow is used to log parameters, metrics, and models, ensuring reproducibility and tracking of experiments.
 
