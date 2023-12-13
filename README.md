@@ -1,10 +1,10 @@
 # Zillow Real Estate Data (ZILLOW)
 
-## Overview
+## Overview of Dataset
 
 The Zillow Real Estate Data (ZILLOW) data feed provides comprehensive real estate market indicators such as market indices, rental rates, sales figures, and inventory levels for thousands of geographical areas across the United States.
 
-### Publisher
+### Publisher of Dataset
 
 Zillow, a leader in real estate and rental marketplaces, is dedicated to empowering consumers with data, inspiration, and knowledge about their living spaces, and connecting them with top local professionals for assistance.
 
@@ -25,7 +25,7 @@ The covers over 700 regions in the U.S.
 The Project focussess on following Categories
 - **Metro Area & USA**
 
-## Access
+## API Access
 
 This product is accessible via the Nasdaq Data Link's Tables API.
 
