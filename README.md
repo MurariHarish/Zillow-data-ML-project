@@ -92,3 +92,4 @@ Features comprise 3 various sets of indicators.
 - **Step-03: build model using x_train_scaled.shape[1] as input to build the model.
 - **Step-04: train the model by passing the X_train and y_train as arguments with learning rates and epochs passed from the ModelTrainingConfig class from the file configentity.
 - **Step-05: Save the models directory as model.keras
+- 
