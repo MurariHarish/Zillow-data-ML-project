@@ -324,7 +324,7 @@ The final phase of the workflow is the *Continuous Deployment* job, which operat
 - **System Pruning**: Cleans up the system by removing any unused Docker images and containers to maintain a clean deployment environment.
 
 ## AWS configuration for MLOps
-Following is comprehensive walkthrough for deploying applications using AWS services with the integration of GitHub Actions. It covers the entire process from setting up necessary AWS resources to configuring GitHub Actions for seamless CI/CD.
+Following is comprehensive walkthrough for how I deployed the application using AWS services with the integration of GitHub Actions. It covers the entire process from setting up necessary AWS resources to configuring GitHub Actions for seamless CI/CD.
 
 ## Getting Started
 
