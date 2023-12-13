@@ -141,6 +141,11 @@ Install all the required Python packages:
 ```bash
 pip install -r requirements.txt
 ```
+#### 4. Run Application
+
+```bash
+python app.py
+```
 # MLOps Tools Overview
 
 In our project, we employ a suite of advanced tools to streamline our machine learning operations (MLOps). Each tool plays a critical role in the development, deployment, and maintenance of our machine learning models.
@@ -408,25 +413,6 @@ Data drift occurs when the statistical properties of model input data change ove
 Below are some of the Sample Predictions showcasing the efficiency of the model.
 ![sample](templates/sample-predictions.png)
 
-# Cost Analysis Report
-A breakdown of the costs associated with the Continuous Integration and Deployment pipeline, hosted on AWS and utilizing GitHub Actions.
-
-## Initial Cost Analysis
-- **Amazon EC2 Instance (t2.large, 32 GB, Ubuntu OS)**
-  - Monthly cost: Approximately $73.00
-
-- **Amazon ECR Storage (3.5 GB Docker Image)**
-  - Monthly cost: Approximately $0.35
-
-- **Amazon S3 Bucket**
-  - Monthly Cost: Approximately $0.20
-
-- **AWS Quicksight**
-  - Monthly Cost: Approximately $30.85
-
-**Total Estimated Monthly Cost: $104.40**
-
-
 # DVC (Data Versioning Control)
 
 ## Overview
@@ -473,3 +459,21 @@ To run the pipeline stages with DVC:
 
 ![dvc_s3](templates/dvc_s3.png)
 Picture of DVC Cache files in S3 Bucket
+
+# Cost Analysis Report
+A breakdown of the costs associated with the Continuous Integration and Deployment pipeline, hosted on AWS and utilizing GitHub Actions.
+
+## Initial Cost Analysis
+- **Amazon EC2 Instance (t2.large, 32 GB, Ubuntu OS)**
+  - Monthly cost: Approximately $73.00
+
+- **Amazon ECR Storage (3.5 GB Docker Image)**
+  - Monthly cost: Approximately $0.35
+
+- **Amazon S3 Bucket**
+  - Monthly Cost: Approximately $0.20
+
+- **AWS Quicksight**
+  - Monthly Cost: Approximately $30.85
+
+**Total Estimated Monthly Cost: $104.40**
