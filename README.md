@@ -104,20 +104,6 @@ Before you begin, ensure you have the following tools installed and ready:
 - **DVC**: Data Version Control, to manage and version the datasets and ML models.
 - **Git/GitHub**: To clone the repository and manage the project's source code.
 
-# MLOps Tools Overview
-
-In our project, we employ a suite of advanced tools to streamline our machine learning operations (MLOps). Each tool plays a critical role in the development, deployment, and maintenance of our machine learning models.
-
-The tools used in our project include:
-
-- GitHub Actions
-- Docker
-- Apache Airflow
-- DVC (Data Version Control)
-- Amazon Web Services (AWS)
-- MLflow
-- Flask
-
 ### Installation Steps
 
 #### 1. Cloning the Repository
@@ -155,22 +141,19 @@ Install all the required Python packages:
 ```bash
 pip install -r requirements.txt
 ```
+# MLOps Tools Overview
 
-#### 4. Docker Configuration
+In our project, we employ a suite of advanced tools to streamline our machine learning operations (MLOps). Each tool plays a critical role in the development, deployment, and maintenance of our machine learning models.
 
-Set up Docker environment variables:
+The tools used in our project include:
 
-```commandline
-echo -e "AIRFLOW_UID=$(id -u)" > .env
-echo "AIRFLOW_HOME_DIR=$(pwd)" >> .env
-```
-
-Initialize and start Airflow services using Docker Compose:
-
-```commandline
-docker compose up airflow-init
-docker compose up
-```
+- GitHub Actions
+- Docker
+- Apache Airflow
+- DVC (Data Version Control)
+- Amazon Web Services (AWS)
+- MLflow
+- Flask
 
 ## Project Pipeline Structure
 
