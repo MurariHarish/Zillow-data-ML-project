@@ -324,9 +324,55 @@ The final phase of the workflow is the *Continuous Deployment* job, which operat
 - **System Pruning**: Cleans up the system by removing any unused Docker images and containers to maintain a clean deployment environment.
 
 ## AWS configuration for MLOps
-Amazon Web Services offers a broad set of global cloud-based products including compute, storage, databases, analytics, networking, and more. In our project, AWS provides reliable, scalable, and inexpensive cloud computing services. We utilize AWS to deploy and manage our machine learning models, as well as to handle various aspects of data storage and processing.
+Following is comprehensive walkthrough for deploying applications using AWS services with the integration of GitHub Actions. It covers the entire process from setting up necessary AWS resources to configuring GitHub Actions for seamless CI/CD.
 
+## Getting Started
 
+### 1. AWS Console Access
+Ensure you have access to the AWS console. This is essential for creating and managing the necessary AWS resources.
+
+### 2. IAM User Creation
+Create an IAM user specifically for deployment purposes. This user should have the following permissions:
+- **`AmazonEC2FullAccess`**: Required for managing EC2 instances, which are virtual machines in AWS.
+- **`AmazonEC2ContainerRegistryFullAccess`**: Essential for storing Docker images in AWS.
+
+### 3. ECR Repository Setup
+Create an ECR repository to store Docker images. Note down the repository's URI for future reference.
+
+### 4. EC2 Instance Creation
+Create an EC2 instance, preferably with an Ubuntu operating system, t2.large as CPU and 32 GB as Memory
+
+### 5. Docker Installation on EC2
+Connect your EC2 instance and install Docker. This involves:
+
+#### Optional Preparations:
+```bash
+sudo apt-get update -y
+sudo apt-get upgrade -y
+```
+
+#### Required Installation Steps:
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo usermod -aG docker ubuntu
+newgrp docker
+```
+
+### 6. Configuring EC2 as a Self-Hosted Runner
+Set up your EC2 instance as a self-hosted runner for GitHub Actions:
+- Navigate to `Settings > Actions > Runners`.
+- Click `New self-hosted runner`.
+- Choose ```Linux``` Operating Systerm
+- Follow the provided instructions to execute the necessary commands in the EC2 instance.
+
+### 7. Setting up GitHub Secrets
+Configure the following secrets in your GitHub repository for secure access:
+- `AWS_ACCESS_KEY_ID`: Your AWS access key.
+- `AWS_SECRET_ACCESS_KEY`: Your AWS secret access key.
+- `AWS_REGION`: Preferred AWS region (e.g., `us-east-1`).
+- `AWS_ECR_LOGIN_URI`: The login URI for your AWS ECR.
+- `ECR_REPOSITORY_NAME`: The name of your ECR repository.
 
 
 
