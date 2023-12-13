@@ -329,7 +329,7 @@ Following is comprehensive walkthrough for how I deployed the application using 
 ## Getting Started
 
 ### 1. AWS Console Access
-Ensure you have access to the AWS console. This is essential for creating and managing the necessary AWS resources.
+Ensure to have access to the AWS console. This is essential for creating and managing the necessary AWS resources.
 
 ### 2. IAM User Creation
 Create an IAM user specifically for deployment purposes. This user should have the following permissions:
@@ -340,10 +340,10 @@ Create an IAM user specifically for deployment purposes. This user should have t
 Create an ECR repository to store Docker images. Note down the repository's URI for future reference.
 
 ### 4. EC2 Instance Creation
-Create an EC2 instance, preferably with an Ubuntu operating system, t2.large as CPU and 32 GB as Memory
+Create an EC2 instance, with an Ubuntu operating system, t2.large as CPU and 32 GB as Memory
 
 ### 5. Docker Installation on EC2
-Connect your EC2 instance and install Docker. This involves:
+Connect the EC2 instance and install Docker. This involves:
 
 #### Optional Preparations:
 ```bash
@@ -360,19 +360,19 @@ newgrp docker
 ```
 
 ### 6. Configuring EC2 as a Self-Hosted Runner
-Set up your EC2 instance as a self-hosted runner for GitHub Actions:
+Set up the EC2 instance as a self-hosted runner for GitHub Actions:
 - Navigate to `Settings > Actions > Runners`.
 - Click `New self-hosted runner`.
 - Choose ```Linux``` Operating Systerm
 - Follow the provided instructions to execute the necessary commands in the EC2 instance.
 
 ### 7. Setting up GitHub Secrets
-Configure the following secrets in your GitHub repository for secure access:
-- `AWS_ACCESS_KEY_ID`: Your AWS access key.
-- `AWS_SECRET_ACCESS_KEY`: Your AWS secret access key.
+Configure the following secrets in GitHub repository for secure access:
+- `AWS_ACCESS_KEY_ID`: AWS access key.
+- `AWS_SECRET_ACCESS_KEY`: AWS secret access key.
 - `AWS_REGION`: Preferred AWS region (e.g., `us-east-1`).
-- `AWS_ECR_LOGIN_URI`: The login URI for your AWS ECR.
-- `ECR_REPOSITORY_NAME`: The name of your ECR repository.
+- `AWS_ECR_LOGIN_URI`: The login URI for AWS ECR.
+- `ECR_REPOSITORY_NAME`: The name of the ECR repository.
 
 
 
