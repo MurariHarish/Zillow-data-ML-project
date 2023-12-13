@@ -8,7 +8,7 @@ def data_ingestion_config():
     # Create a DataIngestionConfig object with your configuration
     config = DataIngestionConfig(
         root_dir= 'artifacts/data_ingestion',
-        source_URL='https://drive.google.com/file/d/1WqpLl5PbrhODaj4WuBB5tDvNCpQDm8MW/view',
+        source_URL='https://drive.google.com/file/d/1MfTc_wxSmPrkQqb8a25pv6ciKiRYCND1/view?usp=sharing',
         local_data_file='artifacts/data_ingestion/zillow_files.zip',
         unzip_dir='artifacts/data_ingestion'
     )
