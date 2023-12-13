@@ -323,6 +323,9 @@ The final phase of the workflow is the *Continuous Deployment* job, which operat
 - **Container Management**: Runs the Docker container to serve the application to users.
 - **System Pruning**: Cleans up the system by removing any unused Docker images and containers to maintain a clean deployment environment.
 
+## AWS configuration for MLOps
+Amazon Web Services offers a broad set of global cloud-based products including compute, storage, databases, analytics, networking, and more. In our project, AWS provides reliable, scalable, and inexpensive cloud computing services. We utilize AWS to deploy and manage our machine learning models, as well as to handle various aspects of data storage and processing.
+
 
 
 
@@ -340,17 +343,4 @@ Apache Airflow is an open-source tool that helps to schedule and orchestrate com
 
 ## DVC (Data Version Control)
 DVC brings agility, traceability, and reproducibility to data science projects. It enables you to track changes in data, code, and machine learning models, and it integrates seamlessly into existing Git workflows. DVC is used in our project to handle large data files, data sets, machine learning models, and metrics associated with the models.
-
-## Amazon Web Services (AWS)
-Amazon Web Services offers a broad set of global cloud-based products including compute, storage, databases, analytics, networking, and more. In our project, AWS provides reliable, scalable, and inexpensive cloud computing services. We utilize AWS to deploy and manage our machine learning models, as well as to handle various aspects of data storage and processing.
-
-## MLflow
-MLflow is an open-source platform to manage the ML lifecycle, including experimentation, reproducibility, and deployment. It offers four primary functions: tracking experiments to record and compare parameters and results, packaging ML code in a reproducible way, managing and deploying models from a variety of ML libraries, and centralizing model storage. We leverage MLflow to track our experiments and manage the deployment of models into production.
-
-## TensorFlow
-TensorFlow is an end-to-end open-source platform for machine learning. It has a comprehensive, flexible ecosystem of tools, libraries, and community resources that lets researchers push the state-of-the-art in ML, and developers easily build and deploy ML-powered applications. In our project, TensorFlow is used to build and train our neural network models.
-
-## Flask
-Flask is a micro web framework written in Python. It's simple and easy to use, making it an excellent choice for prototyping and building web applications. We use Flask to create APIs for our machine learning models, allowing them to be easily accessed by other applications or services.
-
 
