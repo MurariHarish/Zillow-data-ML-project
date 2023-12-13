@@ -33,20 +33,14 @@ class DataPreprocessing:
     def read_and_filter_data(self, chunk_size=10000):
         # Read the CSV file in chunks
         try:
-            logger.info(">>>>>> filename data <<<<<<\n\nx==========x")
-            logger.info(self.file_name)
-            logger.info(">>>>>> path data <<<<<<\n\nx==========x")
-            logger.info(self.file_path)
-
             chunks = pd.read_csv(self.file_path, usecols=['indicator_id', 'region_id', 'date', 'value'],
                                 dtype=self.dtypes, chunksize=chunk_size)
             
             filtered_chunks = []
             for chunk_number, chunk in enumerate(chunks, start=1):
-                #logger.info(f"Processing Chunk {chunk_number}")
                 # Filter rows by date
-                chunk['date'] = pd.to_datetime(chunk['date'])  # Ensure date column is in datetime format
-                start_date = np.datetime64(self.start_date) # Convert self.start_date to datetime64[ns]
+                chunk['date'] = pd.to_datetime(chunk['date'])  
+                start_date = np.datetime64(self.start_date)
                 chunk = chunk[chunk['date'] >= start_date]
                 filtered_chunks.append(chunk)
 
@@ -84,7 +78,23 @@ class DataPreprocessing:
             ZHVI_df = df_month_year[df_month_year['indicator_id'].isin(interested_indicators_ZHVI)]
             
             final_df = pd.merge(ZHVI_df, df_stats, on=['region_id', 'year', 'month'], how='inner')
-            final_df.to_csv(self.final_csv_path)
+
+            return final_df
+        
+        except Exception as e:
+            raise CustomException(e,sys)
+        
+    def clean_dataset(self, df):
+        try:
+            # Round off CRAM to 4 decimal places
+            df['CRAM'] = df['CRAM'].round(4)
+            
+            # Convert IRAM, LRAM, MRAM, NRAM, SRAM to integer
+            integer_columns = ['IRAM', 'LRAM', 'MRAM', 'NRAM', 'SRAM']
+            for col in integer_columns:
+                df[col] = df[col].astype(int)
+
+            df.to_csv(self.final_csv_path)
             logger.info(f">>>>>> Saved final.csv to {self.final_csv_path} <<<<<<\n\nx==========x")
 
             if os.path.exists(self.file_path):
@@ -93,8 +103,8 @@ class DataPreprocessing:
             else:
                 print(f"The file '{self.file_path}' does not exist.")
 
-            return final_df
-        
+            return df
+
         except Exception as e:
             raise CustomException(e,sys)
 
