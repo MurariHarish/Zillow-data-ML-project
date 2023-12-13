@@ -398,6 +398,21 @@ Effective model monitoring is essential to ensure the accuracy and performance o
 
 # Handling Data Drift and Data Decay
 
+Data drift occurs when the statistical properties of model input data change over time, leading to a decrease in model performance. Data decay refers to the gradual degradation of model accuracy as the real-world scenarios it was trained on evolve.
+
+## Detection and Monitoring Strategy
+
+### AWS QuickSight Dashboard Monitoring
+- **Role**: AWS QuickSight plays a crucial role in detecting data drift. By integrating with our S3 data storage, QuickSight provides real-time visualization and monitoring of the model's input data.
+- **Data Drift Indicators**: The dashboard is configured to alert users when new data deviates significantly from the data distribution used in the initial training. This includes changes in data patterns, distributions, and relationships between variables.
+
+## Response to Data Drift and Data Decay
+
+### Model Retraining Protocol
+- **Trigger**: When data drift is detected, signifying a potential decrease in model accuracy, our protocol is to initiate the retraining of the model.
+- **Process**: The retraining process involves updating the model with the latest data, ensuring that it learns from the most recent trends and patterns.
+- **Validation**: Post-retraining, the model undergoes a rigorous validation process to ensure data decay.
+
 # Sample Predictions
 
 # Cost Analysis Report
