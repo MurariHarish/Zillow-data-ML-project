@@ -414,6 +414,8 @@ Data drift occurs when the statistical properties of model input data change ove
 - **Validation**: Post-retraining, the model undergoes a rigorous validation process to ensure data decay.
 
 # Sample Predictions
+Below are some of the Sample Predictions showcasing the efficiency of the model.
+![sample](templates/sample-predictions.jpeg)
 
 # Cost Analysis Report
 A breakdown of the costs associated with the Continuous Integration and Deployment pipeline, hosted on AWS and utilizing GitHub Actions.
