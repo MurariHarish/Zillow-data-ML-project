@@ -376,10 +376,18 @@ Configure the following secrets in GitHub repository for secure access:
 - `AWS_ECR_LOGIN_URI`: The login URI for AWS ECR.
 - `ECR_REPOSITORY_NAME`: The name of the ECR repository.
 
+# DVC (Data Version Control)
+DVC brings agility, traceability, and reproducibility to data science projects. It enables you to track changes in data, code, and machine learning models, and it integrates seamlessly into existing Git workflows. DVC is used in our project to handle large data files, data sets, machine learning models, and metrics associated with the models.
+
 # Model Monitoring
 
+# Cost Analysis
 
+# Model Efficiency Report
 
+# Handling Data Drift and Data Decay
+
+# Sample Predictions
 
 
 
@@ -390,6 +398,5 @@ Docker is a containerization platform that packages an application and its depen
 ## Apache Airflow
 Apache Airflow is an open-source tool that helps to schedule and orchestrate complex data pipelines. By defining workflows as code, they can be more dynamic, maintainable, and transparent. We use Airflow to ensure that the right tasks are executed at the right time, handling dependencies across our data pipeline.
 
-## DVC (Data Version Control)
-DVC brings agility, traceability, and reproducibility to data science projects. It enables you to track changes in data, code, and machine learning models, and it integrates seamlessly into existing Git workflows. DVC is used in our project to handle large data files, data sets, machine learning models, and metrics associated with the models.
+
 
