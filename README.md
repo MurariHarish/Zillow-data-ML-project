@@ -426,5 +426,50 @@ A breakdown of the costs associated with the Continuous Integration and Deployme
 
 **Total Estimated Monthly Cost: $104.40**
 
-# DVC (Data Version Control)
-DVC brings agility, traceability, and reproducibility to data science projects. It enables you to track changes in data, code, and machine learning models, and it integrates seamlessly into existing Git workflows. DVC is used in our project to handle large data files, data sets, machine learning models, and metrics associated with the models.
+
+# DVC (Data Versioning Control)
+
+## Overview
+
+The pipeline is managed using DVC (Data Version Control), ensuring reproducibility and version control for data science projects. A key feature of this project is the storage of files in an AWS S3 bucket, which facilitates efficient data handling and sharing. Additionally, using DVC helps in optimizing the pipeline execution by skipping stages that have not been updated, ensuring a more efficient and time-saving process.
+
+## Pipeline Stages
+
+The pipeline consists of the following stages:
+
+1. **Data Ingestion**
+2. **Data Preprocessing**
+3. **Model Training**
+4. **Model Evaluation**
+
+## Setting Up DVC
+
+To manage the pipeline with DVC:
+
+1. Install DVC: `pip install dvc_s3`
+2. Initialize DVC in your project directory: `dvc init`
+
+## Configuring AWS S3 for DVC Cache
+
+To use AWS S3 as a remote storage for DVC cache:
+
+1. Set up an AWS account and an S3 bucket.
+2. Configure AWS credentials on your machine.
+3. Add the S3 bucket as a remote storage in DVC:
+   ```
+   dvc remote add -d myremote s3://mybucket/path
+   ```
+4. Push the DVC cache to S3:
+   ```
+   dvc push
+   ```
+
+## Running the Pipeline
+
+To run the pipeline stages with DVC:
+
+1. Run a specific stage: `dvc repro stages:<stage_name>`
+2. To run all stages: `dvc repro`
+
+![dvc_s3](templates/dvc_s3.png)
+Picture of DVC Cache files in S3 Bucket
