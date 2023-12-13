@@ -202,6 +202,49 @@ Zillow-data-ML-project/
 ## Data Processing Pipeline Flowchart
 ![Data Processing Pipeline Flowchart](templates/workflow.jpeg)
 
+# Model Evaluation Pipeline
+
+## Overview
+
+The `ModelEvaluatePipeline` class orchestrates the evaluation of the trained machine learning model. It achieves this by executing a series of steps:
+
+1. **Model Loading**: Retrieves the saved Keras model from the filesystem.
+2. **Data Preparation**: Loads the scaled test dataset (`X_test_scaled`) and the true labels (`y_test`).
+3. **Model Evaluation**: Utilizes the loaded model to predict on the test data and computes performance metrics such as Mean Squared Error (MSE), Root Mean Squared Error (RMSE), and R-squared (R2).
+
+### Evaluation Metrics
+
+The performance of the model is quantified using the following metrics:
+
+- **MSE (Mean Squared Error)**: Measures the average squared difference between the estimated values and the actual value.
+- **RMSE (Root Mean Squared Error)**: The square root of MSE which measures the standard deviation of the residuals.
+- **R2 (R-squared)**: Represents the proportion of the variance for the dependent variable that's explained by the independent variables in the model.
+
+## MLflow Integration
+
+MLflow is an open-source platform for the complete machine learning lifecycle. Within our pipeline, MLflow is used to log parameters, metrics, and models, ensuring reproducibility and tracking of experiments.
+
+### MLflow Setup
+
+- For the purpose of tracking model performance within our team, MLflow tracking URI is set to a remote server hosted on DagsHub. [MLflow Tracking URI](https://dagshub.com/MurariHarish/Zillow-data-ML-project.mlflow/#/experiments/0)
+- A user can also track the model performance in local server by updating the tracking uri in the terminal as shown below.
+
+```bash
+mlflow.set_tracking_uri("http://127.0.0.1:5001")
+```
+run 
+```bash
+mlflow ui
+```
+
+### Logging with MLflow
+
+During the evaluation, the following elements are logged:
+
+- **Parameters**: The parameters used for the model, loaded from a pickle object.
+- **Metrics**: The calculated MSE, RMSE, and R2 metrics are logged for each run.
+- **Model**: The trained model is logged in MLflow under the name "FeedForwardModel".
+
 # User Prediction Pipeline
 
 ## Overview
